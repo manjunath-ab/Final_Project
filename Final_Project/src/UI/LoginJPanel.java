@@ -4,6 +4,11 @@
  */
 package UI;
 
+import model.UserLogin;
+import static UI.MainJFrame.userLoginList;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -26,19 +31,200 @@ public class LoginJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnLogin = new javax.swing.JButton();
+        txtUserName = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
+        lblUserName = new javax.swing.JLabel();
+        lblPass = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cbType = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+
+        jPanel1.setBackground(new java.awt.Color(102, 0, 102));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        btnLogin.setBackground(new java.awt.Color(0, 0, 0));
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserNameActionPerformed(evt);
+            }
+        });
+
+        lblUserName.setForeground(new java.awt.Color(255, 255, 255));
+        lblUserName.setText("User Name");
+
+        lblPass.setForeground(new java.awt.Color(255, 255, 255));
+        lblPass.setText("Password");
+
+        jLabel5.setBackground(new java.awt.Color(102, 0, 102));
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Login");
+
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System Admin", "Community Admin", "Restaurant Owner", "Vendor", "Delivery Service", "Delivery Agent", "Customer", "Warehouse Admin" }));
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("User Type");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUserName)
+                            .addComponent(lblPass))
+                        .addGap(85, 85, 85)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLogin)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(txtPass))
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel7)
+                        .addGap(36, 36, 36)
+                        .addComponent(cbType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(111, 111, 111))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(69, 69, 69)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addComponent(lblUserName))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(btnLogin)
+                .addGap(197, 197, 197))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 715, Short.MAX_VALUE)
+            .addGap(0, 886, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 495, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        //conditons to redirect to sys,comm,hos,doc and patient
+        //starting with sys:
+        //for this application we need to add everything in one button functionality
+        if((txtUserName.getText().equals("sysadmin"))&&(txtPass.getText().equals("123"))){
+            SysAdminJPanel sysPanel=new SysAdminJPanel();
+            MainJFrame.splitPane.setRightComponent(sysPanel);
+        }
+        else{
+
+        for(UserLogin e :userLoginList.getUserLoginList()){
+
+            if(txtUserName.getText().equals(e.getUserName())&&txtPass.getText().equals(e.getPass())){
+                if(e.getUserType().equals("Customer")){
+                            //Pass Username to customer panel to retreive details form DB
+                            CustomerJPanel cPanel=new CustomerJPanel(txtUserName.getText());
+                            splitPane.setRightComponent(cPanel);
+                            return;
+                        }
+                else if(e.getUserType().equals("Community Admin")){
+                    CommAdminJPanel comPanel=new CommAdminJPanel(txtUserName.getText());
+                            splitPane.setRightComponent(comPanel);
+                            return;
+                }
+                else if(e.getUserType().equals("Warehouse Admin")){
+                    WarAdminJPanel warPanel=new WarAdminJPanel(txtUserName.getText());
+                            splitPane.setRightComponent(warPanel);
+                            return;
+                }
+                else if(e.getUserType().equals("Restaurant Owner")){
+                    RestaurantJPanel resPanel=new RestaurantJPanel(txtUserName.getText());
+                            splitPane.setRightComponent(resPanel);
+                            return;
+                }
+                else if(e.getUserType().equals("Vendor")){
+                    VendorJPanel venPanel=new VendorJPanel(txtUserName.getText());
+                            splitPane.setRightComponent(venPanel);
+                            return;
+                }
+                else if(e.getUserType().equals("Delivery Service")){
+                    DSJPanel dsPanel=new DSJPanel(txtUserName.getText());
+                            splitPane.setRightComponent(dsPanel);
+                            return;
+                }
+                else if(e.getUserType().equals("Delivery Agent")){
+                    DAJPanel daPanel=new DAJPanel(txtUserName.getText());
+                            splitPane.setRightComponent(daPanel);
+                            return;
+                }
+                
+                else{
+                    JOptionPane.showMessageDialog(this,"Check User Type");
+                    return;
+                }
+            }
+        
+        }
+        JOptionPane.showMessageDialog(this,"Invalid User");
+            return;
+
+        }
+        
+
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JComboBox<String> cbType;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblPass;
+    private javax.swing.JLabel lblUserName;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
