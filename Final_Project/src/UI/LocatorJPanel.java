@@ -8,12 +8,12 @@ package UI;
  *
  * @author Admin
  */
-public class SysAdminJPanel extends javax.swing.JPanel {
+public class LocatorJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form SysAdminJPanel
+     * Creates new form LocatorJPanel
      */
-    public SysAdminJPanel() {
+    public LocatorJPanel() {
         initComponents();
     }
 
@@ -30,11 +30,11 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -72,7 +72,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Login");
 
-        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System Admin", "Community Admin", "Restaurant Owner", "Vendor", "Delivery Service", "Delivery Agent", "Customer", "Warehouse Admin" }));
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Locator", "Community Admin", "Restaurant Owner", "Vendor", "Delivery Service", "Delivery Agent", "Customer", "Warehouse Admin" }));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("User Type");
@@ -150,9 +150,9 @@ public class LoginJPanel extends javax.swing.JPanel {
         //conditons to redirect to sys,comm,hos,doc and patient
         //starting with sys:
         //for this application we need to add everything in one button functionality
-        if((txtUserName.getText().equals("sysadmin"))&&(txtPass.getText().equals("123"))){
-            SysAdminJPanel sysPanel=new SysAdminJPanel();
-            MainJFrame.splitPane.setRightComponent(sysPanel);
+        if((txtUserName.getText().equals("locator"))&&(txtPass.getText().equals("123"))){
+            LocatorJPanel locPanel=new LocatorJPanel();
+            MainJFrame.splitPane.setRightComponent(locPanel);
         }
         else{
 
@@ -161,7 +161,7 @@ public class LoginJPanel extends javax.swing.JPanel {
             if(txtUserName.getText().equals(e.getUserName())&&txtPass.getText().equals(e.getPass())){
                 if(e.getUserType().equals("Customer")){
                             //Pass Username to customer panel to retreive details form DB
-                            CustomerJPanel cPanel=new CustomerJPanel(txtUserName.getText());
+                            CustomerSheet cPanel=new CustomerSheet();
                             splitPane.setRightComponent(cPanel);
                             return;
                         }

@@ -8,12 +8,12 @@ package UI;
  *
  * @author Admin
  */
-public class CRUDRestaurant extends javax.swing.JPanel {
+public class CRUDDeliveryAgents extends javax.swing.JPanel {
 
     /**
-     * Creates new form CRUDRestaurant
+     * Creates new form CRUDDeliveryAgents
      */
-    public CRUDRestaurant() {
+    public CRUDDeliveryAgents() {
         initComponents();
     }
 
@@ -30,11 +30,11 @@ public class CRUDRestaurant extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 682, Short.MAX_VALUE)
+            .addGap(0, 645, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 468, Short.MAX_VALUE)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
