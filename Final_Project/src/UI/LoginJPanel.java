@@ -6,6 +6,7 @@ package UI;
 
 import model.UserLogin;
 import static UI.MainJFrame.userLoginList;
+import static UI.MainJFrame.splitPane;
 
 import javax.swing.JOptionPane;
 

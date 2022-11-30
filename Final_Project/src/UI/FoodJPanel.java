@@ -8,15 +8,13 @@ package UI;
  *
  * @author Admin
  */
-public class DSJPanel extends javax.swing.JPanel {
+public class FoodJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form DSJPanel
+     * Creates new form FoodJPanel
      */
-    String username;
-    public DSJPanel(String u) {
+    public FoodJPanel() {
         initComponents();
-        username=u;
     }
 
     /**

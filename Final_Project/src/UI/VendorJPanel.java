@@ -13,8 +13,10 @@ public class VendorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form VendorJPanel
      */
-    public VendorJPanel() {
+    String username;
+    public VendorJPanel(String u) {
         initComponents();
+        username=u;
     }
 
     /**

@@ -13,8 +13,10 @@ public class CommAdminJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CommAdminJPanel
      */
-    public CommAdminJPanel() {
+    String username;
+    public CommAdminJPanel(String u) {
         initComponents();
+        username=u;
     }
 
     /**

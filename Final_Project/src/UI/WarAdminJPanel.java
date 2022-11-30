@@ -13,8 +13,10 @@ public class WarAdminJPanel extends javax.swing.JPanel {
     /**
      * Creates new form WarAdminJPanel
      */
-    public WarAdminJPanel() {
+    String username;
+    public WarAdminJPanel(String u) {
         initComponents();
+        username=u;
     }
 
     /**

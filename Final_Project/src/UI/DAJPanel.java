@@ -13,8 +13,10 @@ public class DAJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DAJPanel
      */
-    public DAJPanel() {
+    String username;
+    public DAJPanel(String u) {
         initComponents();
+        username=u;
     }
 
     /**
