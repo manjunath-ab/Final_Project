@@ -24,4 +24,12 @@ public class UserLoginList {
     public UserLoginList() {
         this.userLoginList =new ArrayList<>();
     }
+    
+    public UserLogin addUser(){
+    
+    UserLogin newUser = new UserLogin();
+    userLoginList.add(newUser);
+    return newUser;
+    
+    }
 }
