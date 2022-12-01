@@ -75,6 +75,11 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         jTextField2.setText("jTextField2");
 
         btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         btnSelect.setText("Select");
 
@@ -146,6 +151,11 @@ public class RestaurantJPanel extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        //push a restaurant object into database with key attributes
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
