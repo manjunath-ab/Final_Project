@@ -72,6 +72,11 @@ public class CRUDDeliveryAgents extends javax.swing.JPanel {
         });
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
 
@@ -142,6 +147,11 @@ public class CRUDDeliveryAgents extends javax.swing.JPanel {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        //Unique validation like register
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
