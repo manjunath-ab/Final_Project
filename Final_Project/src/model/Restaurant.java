@@ -11,9 +11,19 @@ package model;
 public class Restaurant {
     
     private String name;
+    private int id;
     private String cuisine;
     private String location;
     private String ownerUsername;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+   
 
     public String getName() {
         return name;
@@ -46,6 +56,9 @@ public class Restaurant {
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
     }
-    
+    @Override
+    public String toString(){
+        return name;
+    }
     
 }

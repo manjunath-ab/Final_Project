@@ -13,7 +13,9 @@ import com.db4o.config.Configuration;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import java.io.File;
+import java.util.Random;
 import javax.swing.JOptionPane;
+import model.UniqueID;
 
 /**
  *
@@ -31,12 +33,11 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         username=u;
         
         ObjectContainer db = Db4o.openFile("restaurant.db4o");
-        //autopopulate(db);
-        //mdb=db;
-        populateTable(db);
         
-        //ObjectContainer db=createDB();
-        //mdb=db;
+        db.close();
+        populateTable();
+        
+        
         
         
         
@@ -46,7 +47,27 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         newObj.setOwnerUsername(username);
         db.store(newObj);
     }
-    private void printRestaurants(ObjectContainer db){
+    private int generateID(){
+        // create instance of Random class
+        Random rand = new Random();
+        ObjectContainer db = Db4o.openFile("uniqueid.db4o");
+        // Generate random integers in range 0 to 999
+        int rand_int = rand.nextInt(1000);
+        ObjectSet result = db.queryByExample(UniqueID.class);
+        while (result.hasNext()) {
+           UniqueID u=(UniqueID) result.next();
+           if(rand_int==u.getId()){
+               generateID();
+           }      
+        }
+        UniqueID uid=new UniqueID();
+        uid.setId(rand_int);
+        db.store(uid);
+        db.commit();
+        db.close();
+        return rand_int;
+    }
+    /*private void printRestaurants(ObjectContainer db){
         
         ObjectSet result = db.queryByExample(Restaurant.class);
         System.out.println("Number of restaurants: " + result.size()+"\n");
@@ -56,14 +77,14 @@ public class RestaurantJPanel extends javax.swing.JPanel {
 
  }
     }
-    
-    private void populateTable(ObjectContainer db){
-        
+    */
+    private void populateTable(){
+        ObjectContainer db = Db4o.openFile("restaurant.db4o");
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         Restaurant newObj=new Restaurant();
         newObj.setOwnerUsername(username);
-        ObjectSet result = db.queryByExample(Restaurant.class);
+        ObjectSet result = db.queryByExample(newObj);
         while (result.hasNext()) {
         Restaurant r = (Restaurant) result.next();            
             Object[] row = new Object[100];//2 members for now
@@ -74,7 +95,7 @@ public class RestaurantJPanel extends javax.swing.JPanel {
             model.addRow(row);
             
         }
-        
+        db.close();
     }
        
     
@@ -225,10 +246,12 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         newRestaurant.setOwnerUsername(username);
         newRestaurant.setLocation(txtLocation.getText());
         newRestaurant.setName(txtName.getText());
+        newRestaurant.setId(generateID());
         ObjectContainer db = Db4o.openFile("restaurant.db4o");
         db.store(newRestaurant);
         db.commit();
-        populateTable(db);
+        db.close();
+        populateTable();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
@@ -236,18 +259,20 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         int selectedRowIndex = jTable1.getSelectedRow();
         
         if (selectedRowIndex<0){
-            JOptionPane.showMessageDialog(this,"Please select a Hospital");
+            JOptionPane.showMessageDialog(this,"Please select a Restaurant");
             return;
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
         Restaurant selectedRestaurant= (Restaurant) model.getValueAt(selectedRowIndex,0);
         //figure a way to properly link menu per restaurant model
-        CRUDRestaurant crudPanel = new CRUDRestaurant(selected);
+        CRUDRestaurant crudPanel = new CRUDRestaurant(selectedRestaurant);
         //code to move to next JPanel
         //SearchJPanel1 searchJPanel1=new SearchJPanel1(selectedCommunity);
         //searchJPanel1.setVisible(true);
-        MainJFrame.splitPane.setRightComponent(searchDoctorPanel);
+        //ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        //db1.close();
+        MainJFrame.splitPane.setRightComponent(crudPanel);
         
     }//GEN-LAST:event_btnSelectActionPerformed
 
