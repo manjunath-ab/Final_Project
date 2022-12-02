@@ -97,7 +97,7 @@
           <StringArray count="5">
             <StringItem index="0" value="Restaurant Owner"/>
             <StringItem index="1" value="Vendor"/>
-            <StringItem index="2" value="Delivery Service"/>
+            <StringItem index="2" value="Delivery Agent"/>
             <StringItem index="3" value="Customer"/>
             <StringItem index="4" value=" "/>
           </StringArray>

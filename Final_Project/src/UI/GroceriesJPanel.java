@@ -4,6 +4,15 @@
  */
 package UI;
 
+import com.db4o.Db4o;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Grocery;
+import model.GroceryStall;
+import model.Order;
+
 /**
  *
  * @author Admin
@@ -13,8 +22,37 @@ public class GroceriesJPanel extends javax.swing.JPanel {
     /**
      * Creates new form GroceriesJPanel
      */
-    public GroceriesJPanel() {
+    String username;
+    GroceryStall r;
+    String name;
+    String location;
+    public GroceriesJPanel(GroceryStall r,String username,String name,String location) {
         initComponents();
+        this.r=r;
+        this.username=username;
+        this.name=name;
+        this.location=location;
+        populateTable();
+    }
+    private void populateTable(){
+        
+        ObjectContainer db = Db4o.openFile("groceries.db4o");
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        Grocery newObj=new Grocery();
+        newObj.setStallid(r.getId());
+        ObjectSet result = db.queryByExample(newObj);
+        while (result.hasNext()) {
+        Grocery f = (Grocery) result.next();            
+            Object[] row = new Object[100];//2 members for now
+            //row[0]=e.getName();
+            row[0]=f;//1st column stores object names so..they get deleted
+            
+            
+            model.addRow(row);
+            
+        }
+        db.close();
     }
 
     /**
@@ -47,6 +85,11 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         btnPlaceOrder.setText("Order");
+        btnPlaceOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaceOrderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,6 +121,30 @@ public class GroceriesJPanel extends javax.swing.JPanel {
                 .addGap(179, 179, 179))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select an item");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        Grocery selectedItem= (Grocery) model.getValueAt(selectedRowIndex,0);
+        //db implementation for order
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+        Order newOrder=new Order();
+        newOrder.setItem(selectedItem.getName());
+        newOrder.setOrderOwner(username);
+        newOrder.setOwnerName(name);
+        newOrder.setSourceid(selectedItem.getStallid());
+        db.store(newOrder);
+        db.commit();
+        db.close();
+        JOptionPane.showMessageDialog(this,"Order Placed");
+    }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

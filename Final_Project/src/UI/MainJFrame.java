@@ -4,7 +4,6 @@
  */
 package UI;
 import model.UserLogin;
-import model.UserLoginList;
 import com.db4o.ObjectContainer;
 /**
  *
@@ -16,10 +15,10 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     //static ObjectContainer db;
-    static UserLoginList userLoginList;
+    
     public MainJFrame() {
         initComponents();
-        userLoginList=new UserLoginList();
+        
     }
 
     /**

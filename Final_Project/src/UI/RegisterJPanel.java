@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI;
+import com.db4o.Db4o;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import model.UserLogin;
-import static UI.MainJFrame.userLoginList;
 import javax.swing.JOptionPane;
+import model.UniqueID;
 /**
  *
  * @author Admin
@@ -46,7 +49,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
         });
 
-        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Service", "Customer", " " }));
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Agent", "Customer", " " }));
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,13 +123,15 @@ public class RegisterJPanel extends javax.swing.JPanel {
         //put validation for unique username
         //and push to userlogin list
         //registration only for customer ,delivery service and restaurant
-        UserLogin newUser = userLoginList.addUser();
-        //put in uid too
-        //check if its unique
-        for(UserLogin u : userLoginList.getUserLoginList()){
+        UserLogin newUser = new UserLogin();
+        ObjectContainer db = Db4o.openFile("userlogin.db4o");
+        ObjectSet result = db.queryByExample(UserLogin.class);
+        while (result.hasNext()) {
+           UserLogin u=(UserLogin) result.next();
             try{
                 if(u.getUserName().equals(txtUsername.getText())){
                 JOptionPane.showMessageDialog(this,"User ID already exists");
+                db.close();
                     return;
             }
             }catch (Exception e){
@@ -139,15 +144,19 @@ public class RegisterJPanel extends javax.swing.JPanel {
             
             
             JOptionPane.showMessageDialog(this,"Fill in all the fields");
+            db.close();
             return;
             
         }
         newUser.setUserName(txtUsername.getText());
         newUser.setPass(txtPass.getText());
         newUser.setUserType(cbType.getItemAt(cbType.getSelectedIndex()));
-        
+        db.store(newUser);
+        db.commit();
+        db.close();
         JOptionPane.showMessageDialog(this,"Credentials Created");
         return;
+        
         
     }//GEN-LAST:event_btnRegisterActionPerformed
 

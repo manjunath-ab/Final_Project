@@ -4,6 +4,15 @@
  */
 package UI;
 
+import com.db4o.Db4o;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.GroceryStall;
+import model.Order;
+import model.Restaurant;
+
 /**
  *
  * @author Admin
@@ -18,7 +27,25 @@ public class DAJPanel extends javax.swing.JPanel {
         initComponents();
         username=u;
     }
-
+    private void populatebycomm(){
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        Order newObj=new Order();
+        newObj.setLocation(txtLocation.getText());
+        ObjectSet result = db.queryByExample(newObj);
+        while (result.hasNext()) {
+        Order o = (Order) result.next(); 
+        Object[] row = new Object[100];//2 members for now
+            //row[0]=e.getName();
+            row[0]=o;//1st column stores object names so..they get deleted
+            
+            
+            model.addRow(row);
+        }
+        
+        db.close();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,6 +58,10 @@ public class DAJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnDeliver = new javax.swing.JButton();
+        txtLocation = new javax.swing.JTextField();
+        btnGet = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnDeliveries = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -45,36 +76,92 @@ public class DAJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnDeliver.setText("Deliver");
+        btnDeliver.setText("Start Delivery");
+        btnDeliver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeliverActionPerformed(evt);
+            }
+        });
+
+        btnGet.setText("Get Orders");
+        btnGet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Community Name:");
+
+        btnDeliveries.setText("My Deliveries");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(189, 189, 189)
                 .addComponent(btnDeliver)
-                .addGap(317, 317, 317))
+                .addGap(153, 153, 153)
+                .addComponent(btnDeliveries)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(btnGet))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(156, 156, 156))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGet)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(btnDeliver)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeliver)
+                    .addComponent(btnDeliveries))
+                .addGap(82, 82, 82))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
+        // TODO add your handling code here:
+        populatebycomm();
+        
+    }//GEN-LAST:event_btnGetActionPerformed
+
+    private void btnDeliverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliverActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select an order");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
+        
+    }//GEN-LAST:event_btnDeliverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeliver;
+    private javax.swing.JButton btnDeliveries;
+    private javax.swing.JButton btnGet;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtLocation;
     // End of variables declaration//GEN-END:variables
 }
