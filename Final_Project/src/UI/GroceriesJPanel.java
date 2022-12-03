@@ -7,11 +7,13 @@ package UI;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Grocery;
 import model.GroceryStall;
 import model.Order;
+import model.UniqueID;
 
 /**
  *
@@ -33,6 +35,26 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         this.name=name;
         this.location=location;
         populateTable();
+    }
+    private int generateID(){
+        // create instance of Random class
+        Random rand = new Random();
+        ObjectContainer db = Db4o.openFile("uniqueid.db4o");
+        // Generate random integers in range 0 to 999
+        int rand_int = rand.nextInt(1000);
+        ObjectSet result = db.queryByExample(UniqueID.class);
+        while (result.hasNext()) {
+           UniqueID u=(UniqueID) result.next();
+           if(rand_int==u.getId()){
+               generateID();
+           }      
+        }
+        UniqueID uid=new UniqueID();
+        uid.setId(rand_int);
+        db.store(uid);
+        db.commit();
+        db.close();
+        return rand_int;
     }
     private void populateTable(){
         
@@ -140,6 +162,8 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         newOrder.setOrderOwner(username);
         newOrder.setOwnerName(name);
         newOrder.setSourceid(selectedItem.getStallid());
+        newOrder.setOrderID(generateID());
+        newOrder.setLocation(location);
         db.store(newOrder);
         db.commit();
         db.close();

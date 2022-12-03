@@ -28,6 +28,15 @@ public class Order {
     //make it extensive in terms of delivery service
     private String status;
     private String location;
+    private String dagent="";
+
+    public String getDagent() {
+        return dagent;
+    }
+
+    public void setDagent(String dagent) {
+        this.dagent = dagent;
+    }
 
     public String getLocation() {
         return location;

@@ -9,9 +9,8 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.GroceryStall;
 import model.Order;
-import model.Restaurant;
+import static UI.MainJFrame.splitPane;
 
 /**
  *
@@ -26,6 +25,7 @@ public class DAJPanel extends javax.swing.JPanel {
     public DAJPanel(String u) {
         initComponents();
         username=u;
+    
     }
     private void populatebycomm(){
         ObjectContainer db = Db4o.openFile("orders.db4o");
@@ -33,6 +33,7 @@ public class DAJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         Order newObj=new Order();
         newObj.setLocation(txtLocation.getText());
+        newObj.setDagent("");
         ObjectSet result = db.queryByExample(newObj);
         while (result.hasNext()) {
         Order o = (Order) result.next(); 
@@ -93,6 +94,11 @@ public class DAJPanel extends javax.swing.JPanel {
         jLabel1.setText("Community Name:");
 
         btnDeliveries.setText("My Deliveries");
+        btnDeliveries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeliveriesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -151,8 +157,24 @@ public class DAJPanel extends javax.swing.JPanel {
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
         Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
-        
+        //modify data of the object in the db
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+        ObjectSet result = db.queryByExample(selectedOrder);
+        selectedOrder=(Order)result.get(0);
+        //print message delivery is started then poulate table
+        selectedOrder.setStatus("Ongoing");
+        selectedOrder.setDagent(username);
+        db.store(selectedOrder);
+        db.close();
+        JOptionPane.showMessageDialog(this,"Delivery Started");
+        populatebycomm(); 
     }//GEN-LAST:event_btnDeliverActionPerformed
+
+    private void btnDeliveriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveriesActionPerformed
+        // TODO add your handling code here:
+        DADJpanel jpanel=new DADJpanel(username);
+        splitPane.setRightComponent(jpanel);
+    }//GEN-LAST:event_btnDeliveriesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
