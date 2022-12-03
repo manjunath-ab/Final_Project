@@ -127,7 +127,7 @@ public class DADJpanel extends javax.swing.JPanel {
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
-        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,1);
         //modify data of the object in the db
         ObjectContainer db = Db4o.openFile("orders.db4o");
         ObjectSet result = db.queryByExample(selectedOrder);
