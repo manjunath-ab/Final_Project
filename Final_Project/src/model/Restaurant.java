@@ -15,6 +15,11 @@ public class Restaurant {
     private String cuisine;
     private String location;
     private String ownerUsername;
+    private String type="Restaurant";
+
+    public String getType() {
+        return type;
+    }
 
     public int getId() {
         return id;

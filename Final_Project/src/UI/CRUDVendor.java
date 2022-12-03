@@ -41,7 +41,7 @@ public class CRUDVendor extends javax.swing.JPanel {
             Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
             row[0]=gr;//1st column stores object names so..they get deleted
-            
+            row[1]=gr.getPrice();
             
             model.addRow(row);
             
@@ -65,6 +65,8 @@ public class CRUDVendor extends javax.swing.JPanel {
         txtName = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        txtPrice = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,6 +92,14 @@ public class CRUDVendor extends javax.swing.JPanel {
 
         btnDelete.setText("Delete");
 
+        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Price");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,6 +117,10 @@ public class CRUDVendor extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdd)
@@ -122,7 +136,11 @@ public class CRUDVendor extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -139,6 +157,7 @@ public class CRUDVendor extends javax.swing.JPanel {
         Grocery newGrocery= new Grocery();
         newGrocery.setName(txtName.getText());
         newGrocery.setStallid(g.getId());
+        newGrocery.setPrice(Float.parseFloat(txtPrice.getText()));
         ObjectContainer db = Db4o.openFile("groceries.db4o");
         db.store(newGrocery);
         db.commit();
@@ -146,13 +165,19 @@ public class CRUDVendor extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 }

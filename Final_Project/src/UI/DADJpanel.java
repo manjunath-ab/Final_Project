@@ -7,11 +7,10 @@ package UI;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.FoodItem;
 import model.Order;
-import model.Restaurant;
 
 /**
  *
@@ -33,16 +32,18 @@ public class DADJpanel extends javax.swing.JPanel {
         ObjectContainer db = Db4o.openFile("orders.db4o");
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        Order newObj=new Order();
-        newObj.setDagent(username);
-        ObjectSet result = db.queryByExample(newObj);
+        Query query = db.query();
+        query.constrain(Order.class);
+        query.descend("dagent").constrain(username);
+        ObjectSet result=query.execute();
         while (result.hasNext()) {
         Order f = (Order) result.next();            
             Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
-            row[0]=f;//1st column stores object names so..they get deleted
-            
-            
+            row[0]=f.getOrderID();//1st column stores object names so..they get deleted
+            row[1]=f;
+            row[2]=f.getStatus();
+            row[3]=f.getLocation();
             model.addRow(row);
             
         }
@@ -67,13 +68,13 @@ public class DADJpanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Deliveries"
+                "Order ID", "Item Name", "Status", "Name of Orderer", "Delivery Address"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -89,19 +90,19 @@ public class DADJpanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnDelivered)
+                .addGap(278, 278, 278))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(283, 283, 283)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(110, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnDelivered)
-                .addGap(278, 278, 278))
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
