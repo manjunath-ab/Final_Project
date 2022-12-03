@@ -43,7 +43,7 @@ public class DADJpanel extends javax.swing.JPanel {
             row[0]=f.getOrderID();//1st column stores object names so..they get deleted
             row[1]=f;
             row[2]=f.getStatus();
-            row[3]=f.getLocation();
+            //row[3]=f.getLocation();
             model.addRow(row);
             
         }
