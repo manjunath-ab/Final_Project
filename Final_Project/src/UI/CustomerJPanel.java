@@ -4,6 +4,14 @@
  */
 package UI;
 
+import com.db4o.Db4o;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.GroceryStall;
+import model.Restaurant;
+
 /**
  *
  * @author Admin
@@ -14,9 +22,54 @@ public class CustomerJPanel extends javax.swing.JPanel {
      * Creates new form CustomerJPanel
      */
     String username;
-    public CustomerJPanel(String u) {
+    String location;
+    String name;
+    public CustomerJPanel(String u,String name,String location) {
         initComponents();
-        username=u;
+        this.username=u;
+        this.name=name;
+        this.location=location;
+        populateRandW();
+        populateVendor();
+    }
+    private void populateRandW(){
+        //need to put in code for warehouses later
+        ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        Restaurant newObj=new Restaurant();
+        newObj.setLocation(location);
+        ObjectSet result = db.queryByExample(newObj);
+        while (result.hasNext()) {
+        Restaurant r = (Restaurant) result.next();            
+            Object[] row = new Object[100];//2 members for now
+            //row[0]=e.getName();
+            row[0]=r;//1st column stores object names so..they get deleted
+            
+            
+            model.addRow(row);
+            
+        }
+        db.close();
+    }
+    private void populateVendor(){
+        ObjectContainer db = Db4o.openFile("grocerystall.db4o");
+        DefaultTableModel model= (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        GroceryStall newObj=new GroceryStall();
+        newObj.setLocation(location);
+        ObjectSet result = db.queryByExample(newObj);
+        while (result.hasNext()) {
+        GroceryStall g = (GroceryStall) result.next();            
+            Object[] row = new Object[100];//2 members for now
+            //row[0]=e.getName();
+            row[0]=g;//1st column stores object names so..they get deleted
+            
+            
+            model.addRow(row);
+            
+        }
+        db.close();
     }
 
     /**
@@ -65,8 +118,18 @@ public class CustomerJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jTable2);
 
         btnfood.setText("Select");
+        btnfood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfoodActionPerformed(evt);
+            }
+        });
 
         btnGroceries.setText("select");
+        btnGroceries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGroceriesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,6 +168,53 @@ public class CustomerJPanel extends javax.swing.JPanel {
                 .addContainerGap(143, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnfoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfoodActionPerformed
+        // TODO add your handling code here:
+        //takes u to food jpanel
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select a Restaurant");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        Restaurant selectedRestaurant= (Restaurant) model.getValueAt(selectedRowIndex,0);
+        //figure a way to properly link menu per restaurant model
+        
+        //code to move to next JPanel
+        //SearchJPanel1 searchJPanel1=new SearchJPanel1(selectedCommunity);
+        //searchJPanel1.setVisible(true);
+        //ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        //db1.close();
+        FoodJPanel fPanel=new FoodJPanel(selectedRestaurant,username,name,location);
+        MainJFrame.splitPane.setRightComponent(fPanel);
+        
+        
+    }//GEN-LAST:event_btnfoodActionPerformed
+
+    private void btnGroceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGroceriesActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable2.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select a stall");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable2.getModel();
+        //getting the whole object to manipulate
+        GroceryStall selectedStall=(GroceryStall) model.getValueAt(selectedRowIndex,0);
+        //figure a way to properly link menu per restaurant model
+        
+        //code to move to next JPanel
+        //SearchJPanel1 searchJPanel1=new SearchJPanel1(selectedCommunity);
+        //searchJPanel1.setVisible(true);
+        //ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        //db1.close();
+        GroceriesJPanel fPanel=new GroceriesJPanel(selectedStall,username,name,location);
+        MainJFrame.splitPane.setRightComponent(fPanel);
+    }//GEN-LAST:event_btnGroceriesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
