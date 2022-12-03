@@ -11,6 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Order;
 import static UI.MainJFrame.splitPane;
+import com.db4o.query.Constraint;
+import com.db4o.query.Predicate;
+import com.db4o.query.Query;
+import java.util.List;
 
 /**
  *
@@ -22,6 +26,7 @@ public class DAJPanel extends javax.swing.JPanel {
      * Creates new form DAJPanel
      */
     String username;
+    String location;
     public DAJPanel(String u) {
         initComponents();
         username=u;
@@ -31,17 +36,20 @@ public class DAJPanel extends javax.swing.JPanel {
         ObjectContainer db = Db4o.openFile("orders.db4o");
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        Order newObj=new Order();
-        newObj.setLocation(txtLocation.getText());
-        newObj.setDagent("");
-        ObjectSet result = db.queryByExample(newObj);
-        while (result.hasNext()) {
+        Query query = db.query();
+        query.constrain(Order.class);
+        Constraint constr = query.descend("location").constrain(location);
+        query.descend("dagent").constrain("Unassigned").and(constr);
+        ObjectSet result=query.execute();
+        while(result.hasNext()){
         Order o = (Order) result.next(); 
         Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
             row[0]=o;//1st column stores object names so..they get deleted
-            
-            
+            row[1]=o.getOrderID();
+            //need to put from location and to location.
+            row[2]=o.getStatus();
+            row[3]=o.getLocation();
             model.addRow(row);
         }
         
@@ -66,13 +74,13 @@ public class DAJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "OrderID", "Item", "Location/Community"
+                "Item Name", "Order ID", "Test Loc", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -142,6 +150,8 @@ public class DAJPanel extends javax.swing.JPanel {
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
         // TODO add your handling code here:
+        
+        location=txtLocation.getText();
         populatebycomm();
         
     }//GEN-LAST:event_btnGetActionPerformed
@@ -159,12 +169,17 @@ public class DAJPanel extends javax.swing.JPanel {
         Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
         //modify data of the object in the db
         ObjectContainer db = Db4o.openFile("orders.db4o");
+       //List <Order> result=db.queryByExample(selectedOrder);
         ObjectSet result = db.queryByExample(selectedOrder);
-        selectedOrder=(Order)result.get(0);
-        //print message delivery is started then poulate table
-        selectedOrder.setStatus("Ongoing");
+        
+        selectedOrder=(Order)result.next();
         selectedOrder.setDagent(username);
+        selectedOrder.setStatus("Ongoing");
+        //System.out.print(selectedOrder);
+        System.out.print(selectedOrder.getOrderID());
+        //selectedOrder.setStatus("Ongoing");
         db.store(selectedOrder);
+        db.commit();
         db.close();
         JOptionPane.showMessageDialog(this,"Delivery Started");
         populatebycomm(); 

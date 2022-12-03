@@ -45,7 +45,8 @@ public class CustomerJPanel extends javax.swing.JPanel {
             Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
             row[0]=r;//1st column stores object names so..they get deleted
-            
+            row[1]=r.getCuisine();
+            row[2]=r.getType();
             
             model.addRow(row);
             
@@ -93,13 +94,13 @@ public class CustomerJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Restaurant and Warehouses"
+                "Name", "Cuisine", "Type"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -112,7 +113,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
                 {null}
             },
             new String [] {
-                "Vendors in that area"
+                "Grocery Stalls"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -124,7 +125,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnGroceries.setText("select");
+        btnGroceries.setText("Select");
         btnGroceries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGroceriesActionPerformed(evt);

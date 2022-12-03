@@ -90,7 +90,8 @@ public class RestaurantJPanel extends javax.swing.JPanel {
             Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
             row[0]=r;//1st column stores object names so..they get deleted
-            
+            row[1]=r.getCuisine();
+            row[2]=r.getLocation();
             
             model.addRow(row);
             
@@ -124,13 +125,13 @@ public class RestaurantJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "My Restaurants"
+                "Restaurant Name", "Cuisine", "Location"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

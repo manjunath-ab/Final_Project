@@ -26,9 +26,9 @@ public class Order {
     private String orderOwner;
     private String ownerName;
     //make it extensive in terms of delivery service
-    private String status;
+    private String status="Not Started";
     private String location;
-    private String dagent="";
+    private String dagent="Unassigned";
 
     public String getDagent() {
         return dagent;
@@ -53,11 +53,6 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    
-
-    
-
     
     public String getOwnerName() {
         return ownerName;

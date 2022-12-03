@@ -45,5 +45,9 @@ public class GroceryStall {
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
     }
+    @Override
+    public String toString(){
+        return name;
+    }
     
 }
