@@ -10,9 +10,9 @@ import com.db4o.ObjectSet;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Grocery;
-import model.GroceryStall;
-import model.Order;
+import model.Vendor.Grocery;
+import model.Vendor.GroceryStall;
+import model.Order.Order;
 import model.UniqueID;
 
 /**

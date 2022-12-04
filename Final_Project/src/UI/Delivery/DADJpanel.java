@@ -10,7 +10,7 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Order;
+import model.Order.Order;
 
 /**
  *

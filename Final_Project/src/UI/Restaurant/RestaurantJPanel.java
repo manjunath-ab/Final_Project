@@ -10,7 +10,7 @@ import com.db4o.Db4o;
 import javax.swing.table.DefaultTableModel;
 //import static UI.MainJFrame.db;
 import java.util.ArrayList;
-import model.Restaurant;
+import model.Restaurant.Restaurant;
 import com.db4o.config.Configuration;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
