@@ -48,8 +48,8 @@ public class DAJPanel extends javax.swing.JPanel {
             row[0]=o;//1st column stores object names so..they get deleted
             row[1]=o.getOrderID();
             //need to put from location and to location.
-            row[2]=o.getStatus();
-            row[3]=o.getLocation();
+            row[3]=o.getStatus();
+            //row[3]=o.getLocation();
             model.addRow(row);
         }
         

@@ -43,7 +43,7 @@ public class DADJpanel extends javax.swing.JPanel {
             row[0]=f.getOrderID();//1st column stores object names so..they get deleted
             row[1]=f;
             row[2]=f.getStatus();
-            row[3]=f.getLocation();
+            //row[3]=f.getLocation();
             model.addRow(row);
             
         }
@@ -127,7 +127,7 @@ public class DADJpanel extends javax.swing.JPanel {
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
-        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,1);
         //modify data of the object in the db
         ObjectContainer db = Db4o.openFile("orders.db4o");
         ObjectSet result = db.queryByExample(selectedOrder);
