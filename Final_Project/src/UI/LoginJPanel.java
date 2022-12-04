@@ -4,13 +4,17 @@
  */
 package UI;
 
+import UI.Customer.CustomerSheet;
+import UI.Delivery.DAJPanel;
+import UI.Vendor.VendorJPanel;
+import UI.Restaurant.RestaurantJPanel;
 import model.UserLogin;
 
 import static UI.MainJFrame.splitPane;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-
+import UI.RestaurantAdmin.RestaurantAdminJpanel;
 import javax.swing.JOptionPane;
 
 /**
@@ -143,6 +147,11 @@ public class LoginJPanel extends javax.swing.JPanel {
             LocatorJPanel locPanel=new LocatorJPanel();
             MainJFrame.splitPane.setRightComponent(locPanel);
         }
+        else if((txtUserName.getText().equals("Restaurant Admin"))&&(txtPass.getText().equals("123"))){
+             RestaurantAdminJpanel jPanel=new RestaurantAdminJpanel();
+             splitPane.setRightComponent(jPanel);
+             return;
+        }
         else{
 
         UserLogin newUser = new UserLogin();
@@ -160,18 +169,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                        splitPane.setRightComponent(cPanel);
                        return;
                    }
-                   case "Community Admin" -> {
-                       CommAdminJPanel comPanel=new CommAdminJPanel(txtUserName.getText());
-                       db.close();
-                       splitPane.setRightComponent(comPanel);
-                       return;
-                   }
-                   case "Warehouse Admin" -> {
-                       WarAdminJPanel warPanel=new WarAdminJPanel(txtUserName.getText());
-                       db.close();
-                       splitPane.setRightComponent(warPanel);
-                       return;
-                   }
+                   
                    case "Restaurant Owner" -> {
                        RestaurantJPanel resPanel=new RestaurantJPanel(txtUserName.getText());
                        db.close();
