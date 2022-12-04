@@ -11,7 +11,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Restaurant;
+import model.Restaurant.Restaurant;
 
 /**
  *

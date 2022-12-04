@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package model.Vendor;
 
 /**
  *
  * @author Admin
  */
-public class FoodItem {
+public class Grocery {
     private String name;
-    private String description;
-    private int restaurantid;
+    private int stallid;
     private float price;
 
     public float getPrice() {
@@ -20,13 +19,6 @@ public class FoodItem {
 
     public void setPrice(float price) {
         this.price = price;
-    }
-    public int getRestaurantid() {
-        return restaurantid;
-    }
-
-    public void setRestaurantid(int restaurantid) {
-        this.restaurantid = restaurantid;
     }
 
     public String getName() {
@@ -37,16 +29,16 @@ public class FoodItem {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public int getStallid() {
+        return stallid;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStallid(int stallid) {
+        this.stallid = stallid;
     }
-    
     @Override
     public String toString(){
         return name;
     }
+
 }

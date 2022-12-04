@@ -12,7 +12,7 @@ import com.db4o.ObjectSet;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.GroceryStall;
+import model.Vendor.GroceryStall;
 import model.UniqueID;
 
 /**

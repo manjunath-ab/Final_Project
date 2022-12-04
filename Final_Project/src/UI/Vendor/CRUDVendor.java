@@ -8,8 +8,8 @@ import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import javax.swing.table.DefaultTableModel;
-import model.Grocery;
-import model.GroceryStall;
+import model.Vendor.Grocery;
+import model.Vendor.GroceryStall;
 
 /**
  *
