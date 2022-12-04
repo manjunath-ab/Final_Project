@@ -2,50 +2,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI;
+package UI.Vendor;
 
+import UI.MainJFrame;
+import UI.Vendor.CRUDVendor;
 import com.db4o.Db4o;
-import javax.swing.table.DefaultTableModel;
-//import static UI.MainJFrame.db;
-import java.util.ArrayList;
-import model.Restaurant;
-import com.db4o.config.Configuration;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import java.io.File;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.GroceryStall;
 import model.UniqueID;
 
 /**
  *
  * @author Admin
  */
-public class RestaurantJPanel extends javax.swing.JPanel {
+public class VendorJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form RestaurantJPanel
+     * Creates new form VendorJPanel
      */
-    
     String username;
-    public RestaurantJPanel(String u) {
+    public VendorJPanel(String u) {
         initComponents();
         username=u;
-        
-        ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        ObjectContainer db = Db4o.openFile("grocerystall.db4o");
         
         db.close();
         populateTable();
         
-        
-        
-        
-        
-    }
-    private void autopopulate(ObjectContainer db){
-        Restaurant newObj=new Restaurant();
-        newObj.setOwnerUsername(username);
-        db.store(newObj);
     }
     private int generateID(){
         // create instance of Random class
@@ -67,39 +54,25 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         db.close();
         return rand_int;
     }
-    /*private void printRestaurants(ObjectContainer db){
-        
-        ObjectSet result = db.queryByExample(Restaurant.class);
-        System.out.println("Number of restaurants: " + result.size()+"\n");
-        while (result.hasNext()) {
-        Restaurant r = (Restaurant) result.next();
-        System.out.println(r.getOwnerUsername());
-
- }
-    }
-    */
     private void populateTable(){
-        ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        ObjectContainer db = Db4o.openFile("grocerystall.db4o");
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        Restaurant newObj=new Restaurant();
+        GroceryStall newObj=new GroceryStall();
         newObj.setOwnerUsername(username);
         ObjectSet result = db.queryByExample(newObj);
         while (result.hasNext()) {
-        Restaurant r = (Restaurant) result.next();            
+        GroceryStall g = (GroceryStall) result.next();            
             Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
-            row[0]=r;//1st column stores object names so..they get deleted
-            row[1]=r.getCuisine();
-            row[2]=r.getLocation();
+            row[0]=g;//1st column stores object names so..they get deleted
+            
             
             model.addRow(row);
             
         }
         db.close();
     }
-       
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,61 +85,53 @@ public class RestaurantJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnSelect = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         txtLocation = new javax.swing.JTextField();
         btnRegister = new javax.swing.JButton();
-        btnSelect = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Restaurant Name", "Cuisine", "Location"
+                "My Grocery Shops"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("Register Restaurant:");
+        jLabel2.setText("Stall Name");
 
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Restaurant Name");
-
-        jLabel3.setText("Cuisine");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "French", "Greek", "Italian", "Indian", "Chinese", "Japanese", "Korean", "Middle Eastern", " " }));
-
-        jLabel4.setText("Location");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtLocation.setText("jTextField2");
-
-        btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Register Grocery Store:");
 
         btnSelect.setText("Select");
         btnSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Location");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLocationActionPerformed(evt);
+            }
+        });
+
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
             }
         });
 
@@ -188,21 +153,20 @@ public class RestaurantJPanel extends javax.swing.JPanel {
                         .addGap(129, 129, 129)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3)))
-                        .addGap(90, 90, 90)
+                            .addComponent(jLabel4))
+                        .addGap(89, 89, 89)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63)
-                                .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(61, 61, 61))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)))
+                        .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(327, 327, 327)
                         .addComponent(btnRegister)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,36 +184,31 @@ public class RestaurantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(btnRegister)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+    private void txtLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+    }//GEN-LAST:event_txtLocationActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        //push a restaurant object into database with key attributes
-        
-        Restaurant newRestaurant= new Restaurant();
-        newRestaurant.setOwnerUsername(username);
-        newRestaurant.setLocation(txtLocation.getText());
-        newRestaurant.setName(txtName.getText());
-        newRestaurant.setId(generateID());
-        ObjectContainer db = Db4o.openFile("restaurant.db4o");
-        db.store(newRestaurant);
+        GroceryStall newStall= new GroceryStall();
+        newStall.setOwnerUsername(username);
+        newStall.setLocation(txtLocation.getText());
+        newStall.setName(txtName.getText());
+        newStall.setId(generateID());
+        ObjectContainer db = Db4o.openFile("grocerystall.db4o");
+        db.store(newStall);
         db.commit();
         db.close();
         populateTable();
@@ -260,32 +219,29 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         int selectedRowIndex = jTable1.getSelectedRow();
         
         if (selectedRowIndex<0){
-            JOptionPane.showMessageDialog(this,"Please select a Restaurant");
+            JOptionPane.showMessageDialog(this,"Please select a Stall");
             return;
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
-        Restaurant selectedRestaurant= (Restaurant) model.getValueAt(selectedRowIndex,0);
+        GroceryStall selectedStall= (GroceryStall) model.getValueAt(selectedRowIndex,0);
         //figure a way to properly link menu per restaurant model
-        CRUDRestaurant crudPanel = new CRUDRestaurant(selectedRestaurant);
+        CRUDVendor crudPanel = new CRUDVendor(selectedStall);
         //code to move to next JPanel
         //SearchJPanel1 searchJPanel1=new SearchJPanel1(selectedCommunity);
         //searchJPanel1.setVisible(true);
         //ObjectContainer db = Db4o.openFile("restaurant.db4o");
         //db1.close();
         MainJFrame.splitPane.setRightComponent(crudPanel);
-        
     }//GEN-LAST:event_btnSelectActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnSelect;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

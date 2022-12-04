@@ -9,5 +9,11 @@ package model;
  * @author Admin
  */
 public class Warehouse {
+    private String name;
+    private int id;
+    private String location;
+    private String ownerUsername;
+    private String type="Warehouse";
+
     
 }

@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI;
+package UI.Customer;
 
+import UI.MainJFrame;
+import UI.Vendor.GroceriesJPanel;
+import UI.Restaurant.FoodJPanel;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -143,15 +146,15 @@ public class CustomerJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
-                .addGap(319, 319, 319)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addGap(151, 151, 151)
                 .addComponent(btnfood)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGroceries)
-                .addGap(157, 157, 157))
+                .addGap(175, 175, 175))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(319, 319, 319)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,8 +167,8 @@ public class CustomerJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnfood)
-                    .addComponent(btnGroceries))
+                    .addComponent(btnGroceries)
+                    .addComponent(btnfood))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

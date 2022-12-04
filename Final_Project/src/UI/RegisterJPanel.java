@@ -8,7 +8,6 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import model.UserLogin;
 import javax.swing.JOptionPane;
-import model.UniqueID;
 /**
  *
  * @author Admin
