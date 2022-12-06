@@ -8,7 +8,7 @@ import UI.Customer.CustomerSheet;
 import UI.Delivery.DAJPanel;
 import UI.Vendor.VendorJPanel;
 import UI.Restaurant.RestaurantJPanel;
-import model.UserLogin;
+import model.UserLogin.UserLogin;
 
 import static UI.MainJFrame.splitPane;
 import com.db4o.Db4o;

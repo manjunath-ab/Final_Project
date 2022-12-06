@@ -5,8 +5,6 @@
 package UI.Customer;
 
 import UI.MainJFrame;
-import UI.Vendor.GroceriesJPanel;
-import UI.Restaurant.FoodJPanel;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -192,7 +190,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         //searchJPanel1.setVisible(true);
         //ObjectContainer db = Db4o.openFile("restaurant.db4o");
         //db1.close();
-        FoodJPanel fPanel=new FoodJPanel(selectedRestaurant,username,name,location);
+        FoodJPanel fPanel=new FoodJPanel(selectedRestaurant,username,name,location,0,0);
         MainJFrame.splitPane.setRightComponent(fPanel);
         
         
