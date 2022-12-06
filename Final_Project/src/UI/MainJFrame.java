@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI;
-import model.UserLogin;
+import model.UserLogin.UserLogin;
 import com.db4o.ObjectContainer;
 /**
  *

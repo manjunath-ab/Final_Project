@@ -11,6 +11,9 @@ import com.db4o.query.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Order.Order;
+import Map.ViewMap;
+import static UI.MainJFrame.splitPane;
+
 
 /**
  *
@@ -40,8 +43,8 @@ public class DADJpanel extends javax.swing.JPanel {
         Order f = (Order) result.next();            
             Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
-            row[0]=f.getOrderID();//1st column stores object names so..they get deleted
-            row[1]=f;
+            row[0]=f;//1st column stores object names so..they get deleted
+            row[1]=f.getOrderID();
             row[2]=f.getStatus();
             //row[3]=f.getLocation();
             model.addRow(row);
@@ -63,6 +66,7 @@ public class DADJpanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnDelivered = new javax.swing.JButton();
+        btnGetMap = new javax.swing.JButton();
 
         jLabel1.setText("My Deliveries");
 
@@ -86,6 +90,13 @@ public class DADJpanel extends javax.swing.JPanel {
             }
         });
 
+        btnGetMap.setText("Get Map");
+        btnGetMap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetMapActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,16 +112,23 @@ public class DADJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnGetMap)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnGetMap)))
                 .addGap(56, 56, 56)
                 .addComponent(btnDelivered)
                 .addContainerGap(189, Short.MAX_VALUE))
@@ -127,7 +145,7 @@ public class DADJpanel extends javax.swing.JPanel {
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
-        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,1);
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
         //modify data of the object in the db
         ObjectContainer db = Db4o.openFile("orders.db4o");
         ObjectSet result = db.queryByExample(selectedOrder);
@@ -140,9 +158,25 @@ public class DADJpanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnDeliveredActionPerformed
 
+    private void btnGetMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetMapActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select an order");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
+        ViewMap jpanel = new ViewMap(selectedOrder.getToLat(),selectedOrder.getToLong());
+        splitPane.setRightComponent(jpanel);
+    }//GEN-LAST:event_btnGetMapActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelivered;
+    private javax.swing.JButton btnGetMap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

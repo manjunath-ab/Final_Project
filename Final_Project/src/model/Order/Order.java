@@ -12,14 +12,6 @@ package model.Order;
 public class Order {
     
     private int orderID;
-
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
     private String item;
     private int sourceid;
     //link to customer
@@ -29,7 +21,44 @@ public class Order {
     private String status="Not Started";
     private String location;
     private String dagent="Unassigned";
+    private int quantity;
+    private double toLat;
+    private double toLong;
 
+    public double getToLat() {
+        return toLat;
+    }
+
+    public void setToLat(double toLat) {
+        this.toLat = toLat;
+    }
+
+    public double getToLong() {
+        return toLong;
+    }
+
+    public void setToLong(double toLong) {
+        this.toLong = toLong;
+    }
+
+    
+    
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+   
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+    
     public String getDagent() {
         return dagent;
     }

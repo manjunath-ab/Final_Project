@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.Restaurant;
-
+package UI.Customer;
+import Map.Main;
+import static UI.MainJFrame.splitPane;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -28,12 +29,16 @@ public class FoodJPanel extends javax.swing.JPanel {
     Restaurant r;
     String name;
     String location;
-    public FoodJPanel(Restaurant r,String username,String name,String location) {
+    double lat;
+    double longi;
+    public FoodJPanel(Restaurant r,String username,String name,String location,double lat,double longi) {
         initComponents();
         this.r=r;
         this.username=username;
         this.name=name;
         this.location=location;
+        this.lat=lat;
+        this.longi=longi;
         populateTable();
     }
     private int generateID(){
@@ -92,6 +97,9 @@ public class FoodJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnPlaceOrder = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        spinnnerQuant = new javax.swing.JSpinner();
+        btnFrom = new javax.swing.JButton();
 
         jLabel1.setText("Select Food Items");
 
@@ -115,6 +123,15 @@ public class FoodJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("Quantity:");
+
+        btnFrom.setText("Set Drop Location");
+        btnFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFromActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,12 +143,18 @@ public class FoodJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(280, 280, 280)
+                        .addComponent(btnPlaceOrder))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123)
+                        .addComponent(btnFrom)))
                 .addContainerGap(102, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnPlaceOrder)
-                .addGap(277, 277, 277))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,9 +163,14 @@ public class FoodJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(spinnnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFrom))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(btnPlaceOrder)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,17 +194,32 @@ public class FoodJPanel extends javax.swing.JPanel {
         newOrder.setSourceid(selectedItem.getRestaurantid());
         newOrder.setLocation(location);
         newOrder.setOrderID(generateID());
+        newOrder.setToLat(lat);
+        newOrder.setToLong(longi);
+        System.out.print(lat);
+        System.out.print(longi);
         db.store(newOrder);
         db.commit();
         db.close();
+        
         JOptionPane.showMessageDialog(this,"Order Placed");
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
+    private void btnFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFromActionPerformed
+        // TODO add your handling code here:
+        Map.Test jpanel= new Map.Test(r,username,name,location);
+        splitPane.setRightComponent(jpanel);
+        
+    }//GEN-LAST:event_btnFromActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFrom;
     private javax.swing.JButton btnPlaceOrder;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JSpinner spinnnerQuant;
     // End of variables declaration//GEN-END:variables
 }
