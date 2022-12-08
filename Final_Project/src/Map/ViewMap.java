@@ -8,12 +8,8 @@ package Map;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.JOptionPane;
-import javax.swing.event.MouseInputListener;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.VirtualEarthTileFactoryInfo;
-import org.jxmapviewer.input.PanMouseInputListener;
-import org.jxmapviewer.input.ZoomMouseWheelListenerCenter;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
@@ -50,12 +46,7 @@ public class ViewMap extends javax.swing.JPanel {
         jXMapViewer.setAddressLocation(geo);
         jXMapViewer.setZoom(12);
 
-        //  Create event mouse move
-        MouseInputListener mm = new PanMouseInputListener(jXMapViewer);
-        jXMapViewer.addMouseListener(mm);
-        jXMapViewer.addMouseMotionListener(mm);
-        jXMapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCenter(jXMapViewer));
-        event = getEvent();
+       
     }
     
     private void addWaypoint(MyWaypoint waypoint) {
@@ -83,14 +74,6 @@ public class ViewMap extends javax.swing.JPanel {
         initWaypoint();
     }
 
-    private EventWaypoint getEvent() {
-        return new EventWaypoint() {
-            @Override
-            public void selected(MyWaypoint waypoint) {
-                JOptionPane.showMessageDialog(ViewMap.this, waypoint.getName());
-            }
-        };
-    }
 
   
      
@@ -103,7 +86,7 @@ public class ViewMap extends javax.swing.JPanel {
         cmdClear = new javax.swing.JButton();
         comboMapType = new javax.swing.JComboBox<>();
 
-        cmdAdd.setText("Add Waypoint");
+        cmdAdd.setText("View Delivery Point");
         cmdAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddActionPerformed(evt);
@@ -117,7 +100,7 @@ public class ViewMap extends javax.swing.JPanel {
             }
         });
 
-        comboMapType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open Stree", "Virtual Earth", "Hybrid", "Satellite" }));
+        comboMapType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal View", "Virtual Earth View", "Hybrid View", "Satellite View" }));
         comboMapType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboMapTypeActionPerformed(evt);
@@ -131,9 +114,9 @@ public class ViewMap extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXMapViewerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cmdAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(cmdClear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                 .addComponent(comboMapType, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -168,7 +151,7 @@ public class ViewMap extends javax.swing.JPanel {
 
     private void cmdAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddActionPerformed
         //here we send the location back to foodJPael
-        addWaypoint(new MyWaypoint("Test 001", event, new GeoPosition(lat,longi)));
+        addWaypoint(new MyWaypoint("Delivery Location", event, new GeoPosition(lat,longi)));
     }//GEN-LAST:event_cmdAddActionPerformed
 
     private void cmdClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearActionPerformed

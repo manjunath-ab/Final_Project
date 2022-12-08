@@ -41,7 +41,11 @@ public class MyWaypoint extends DefaultWaypoint {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                try{
                 event.selected(MyWaypoint.this);
+                }catch (Exception e){
+                    
+                }
             }
         });
     }
