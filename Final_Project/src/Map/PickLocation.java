@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Map;
+
 import UI.Customer.FoodJPanel;
 import static UI.MainJFrame.splitPane;
 import java.awt.event.MouseAdapter;
@@ -22,15 +23,14 @@ import org.jxmapviewer.viewer.WaypointPainter;
 import waypoint.EventWaypoint;
 import waypoint.MyWaypoint;
 import waypoint.WaypointRender;
-
 /**
  *
  * @author Admin
  */
-public class Test extends javax.swing.JPanel {
+public class PickLocation extends javax.swing.JPanel {
 
     /**
-     * Creates new form Test
+     * Creates new form PickLocation
      */
     String username;
     Restaurant r;
@@ -38,7 +38,7 @@ public class Test extends javax.swing.JPanel {
     String location;
     private final Set<MyWaypoint> waypoints = new HashSet<>();
     private EventWaypoint event;
-    public Test(Restaurant r,String username,String name,String location) {
+    public PickLocation(Restaurant r,String username,String name,String location) {
         initComponents();
         this.r=r;
         this.username=username;
@@ -66,7 +66,7 @@ public class Test extends javax.swing.JPanel {
             if(e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON1){
                 java.awt.Point p = e.getPoint();
                 GeoPosition geo = jXMapViewer.convertPointToGeoPosition(p);
-                addWaypoint(new MyWaypoint("Test 001", event, new GeoPosition(geo.getLatitude(),geo.getLongitude())));
+                addWaypoint(new MyWaypoint("Delivery Location", event, new GeoPosition(geo.getLatitude(),geo.getLongitude())));
                 FoodJPanel jpanel= new FoodJPanel(r,username,name,location,geo.getLatitude(),geo.getLongitude());
                 splitPane.setRightComponent(jpanel);
               }
@@ -74,7 +74,6 @@ public class Test extends javax.swing.JPanel {
      });
         event = getEvent();
     }
-    
     private void addWaypoint(MyWaypoint waypoint) {
         for (MyWaypoint d : waypoints) {
             jXMapViewer.remove(d.getButton());
@@ -104,10 +103,11 @@ public class Test extends javax.swing.JPanel {
         return new EventWaypoint() {
             @Override
             public void selected(MyWaypoint waypoint) {
-                JOptionPane.showMessageDialog(Test.this, waypoint.getName());
+                JOptionPane.showMessageDialog(PickLocation.this, waypoint.getName());
             }
         };
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,74 +119,37 @@ public class Test extends javax.swing.JPanel {
     private void initComponents() {
 
         jXMapViewer = new org.jxmapviewer.JXMapViewer();
-        cmdAdd = new javax.swing.JButton();
-        cmdClear = new javax.swing.JButton();
-
-        cmdAdd.setText("Add Waypoint");
-        cmdAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdAddActionPerformed(evt);
-            }
-        });
-
-        cmdClear.setText("Clear Waypoint");
-        cmdClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdClearActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jXMapViewerLayout = new javax.swing.GroupLayout(jXMapViewer);
         jXMapViewer.setLayout(jXMapViewerLayout);
         jXMapViewerLayout.setHorizontalGroup(
             jXMapViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXMapViewerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cmdAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmdClear)
-                .addContainerGap(957, Short.MAX_VALUE))
+            .addGap(0, 770, Short.MAX_VALUE)
         );
         jXMapViewerLayout.setVerticalGroup(
             jXMapViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXMapViewerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jXMapViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdAdd)
-                    .addComponent(cmdClear))
-                .addContainerGap(632, Short.MAX_VALUE))
+            .addGap(0, 512, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jXMapViewer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jXMapViewer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jXMapViewer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jXMapViewer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddActionPerformed
-        //here we send the location back to foodJPael
-        
-    }//GEN-LAST:event_cmdAddActionPerformed
-
-    private void cmdClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearActionPerformed
-        clearWaypoint();
-    }//GEN-LAST:event_cmdClearActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdAdd;
-    private javax.swing.JButton cmdClear;
     private org.jxmapviewer.JXMapViewer jXMapViewer;
     // End of variables declaration//GEN-END:variables
 }

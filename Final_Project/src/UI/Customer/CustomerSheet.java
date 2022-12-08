@@ -128,7 +128,7 @@ public class CustomerSheet extends javax.swing.JPanel {
                         .addGap(77, 77, 77)
                         .addComponent(btnRaiseReq))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(352, 352, 352)
+                        .addGap(305, 305, 305)
                         .addComponent(btnStartOrder)))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
@@ -151,9 +151,9 @@ public class CustomerSheet extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addGap(37, 37, 37)
                 .addComponent(btnStartOrder)
-                .addGap(28, 28, 28))
+                .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.Customer;
-import Map.Main;
+
 import static UI.MainJFrame.splitPane;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
@@ -207,7 +207,7 @@ public class FoodJPanel extends javax.swing.JPanel {
 
     private void btnFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFromActionPerformed
         // TODO add your handling code here:
-        Map.Test jpanel= new Map.Test(r,username,name,location);
+        Map.PickLocation jpanel= new Map.PickLocation(r,username,name,location);
         splitPane.setRightComponent(jpanel);
         
     }//GEN-LAST:event_btnFromActionPerformed
