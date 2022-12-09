@@ -5,7 +5,6 @@
 package UI.Restaurant;
 
 import UI.MainJFrame;
-import UI.Restaurant.CRUDRestaurant;
 import com.db4o.Db4o;
 import javax.swing.table.DefaultTableModel;
 //import static UI.MainJFrame.db;

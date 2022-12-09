@@ -12,7 +12,6 @@
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/model/Vendor/GroceryStall.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/Delivery/DAJPanel.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/MainJFrame.java</file>
-            <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/Map/Main.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/RegisterJPanel.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/LoginJPanel.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/model/Order/Order.java</file>
@@ -22,6 +21,7 @@
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/Customer/CustomerJPanel.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/waypoint/MyWaypoint.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/ConfirmDeliveryStatus.java</file>
+            <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/Map/PickLocation.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/Restaurant/CRUDRestaurant.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/model/UserLogin/UserLogin.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/RestaurantAdmin/RestaurantAdminJpanel.java</file>
@@ -31,7 +31,6 @@
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/model/Restaurant/Restaurant.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/UI/Customer/GroceriesJPanel.java</file>
             <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/waypoint/ButtonWaypoint.java</file>
-            <file>file:/C:/Users/Admin/Desktop/git_projects/Final_Project/Final_Project/src/Map/Test.java</file>
         </group>
     </open-files>
 </project-private>
