@@ -54,6 +54,8 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
             //row[3]=f.getLocation();
             model.addRow(row);
             
+            
+            
         }
         db.close();
     }
