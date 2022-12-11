@@ -216,6 +216,11 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         });
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -360,6 +365,30 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"Restaurant Deleted");
         populateTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select a Restaurant");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        Restaurant f= (Restaurant) model.getValueAt(selectedRowIndex,0);
+        ObjectContainer db = Db4o.openFile("restaurant.db4o");
+       //List <Order> result=db.queryByExample(selectedOrder);
+        ObjectSet result = db.queryByExample(f);
+        f=(Restaurant)result.next();
+        f.setName(txtName.getText());
+        f.setCuisine(cbCuisine.getItemAt(cbCuisine.getSelectedIndex()));
+        f.setLocation(cbLocation.getItemAt(cbLocation.getSelectedIndex()));
+        db.store(f);
+        db.close();
+        JOptionPane.showMessageDialog(this,"Item Updated");
+        populateTable();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
