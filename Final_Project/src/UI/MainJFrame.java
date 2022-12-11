@@ -120,6 +120,8 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginJPanel loginPanel=new LoginJPanel();
         
+        
+        
         splitPane.setRightComponent(loginPanel);
     }//GEN-LAST:event_btnLoginActionPerformed
 
