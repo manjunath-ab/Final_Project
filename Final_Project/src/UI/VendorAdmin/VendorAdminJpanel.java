@@ -4,6 +4,14 @@
  */
 package UI.VendorAdmin;
 
+import UI.MainJFrame;
+import UI.Vendor.CRUDVendor;
+import com.db4o.Db4o;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Vendor.GroceryStall;
 /**
  *
  * @author smrithijagithyala
@@ -15,8 +23,27 @@ public class VendorAdminJpanel extends javax.swing.JPanel {
      */
     public VendorAdminJpanel() {
         initComponents();
+        populateTable();
     }
 
+    private void populateTable(){
+        ObjectContainer db = Db4o.openFile("grocerystall.db4o");
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        ObjectSet result = db.queryByExample(GroceryStall.class);
+        while (result.hasNext()) {
+        GroceryStall g = (GroceryStall) result.next();        
+            //row[0]=e.getName();
+            Object[] row = new Object[100];//2 members for now
+            //row[0]=e.getName();
+            row[0]=g;//1st column stores object names so..they get deleted
+            
+            
+            model.addRow(row);
+            
+        }
+        db.close();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +71,12 @@ public class VendorAdminJpanel extends javax.swing.JPanel {
 
         jLabel1.setText("Vendor Admin");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Manage");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,6 +107,27 @@ public class VendorAdminJpanel extends javax.swing.JPanel {
                 .addContainerGap(149, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select a Grocery Store");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+         GroceryStall selectedStall= (GroceryStall) model.getValueAt(selectedRowIndex,0);
+         //figure a way to properly link menu per restaurant model
+        CRUDVendor crudPanel = new CRUDVendor(selectedStall);
+        //code to move to next JPanel
+        //SearchJPanel1 searchJPanel1=new SearchJPanel1(selectedCommunity);
+        //searchJPanel1.setVisible(true);
+        //ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        //db1.close();
+        MainJFrame.splitPane.setRightComponent(crudPanel);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
