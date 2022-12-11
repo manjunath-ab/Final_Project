@@ -43,7 +43,9 @@ public class CustomerSheet extends javax.swing.JPanel {
             //row[0]=e.getName();
             row[0]=r.getOrderID();//1st column stores object names so..they get deleted
             row[1]=r;
-            row[2]=r.getStatus();
+            row[2]=r.getQuantity();
+            row[3]=r.getTotalPrice();
+            row[4]=r.getStatus();
             
             model.addRow(row);
             
@@ -92,13 +94,13 @@ public class CustomerSheet extends javax.swing.JPanel {
         jTable1.setBackground(new java.awt.Color(128, 128, 128));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Item Name", "Status"
+                "Order ID", "Item Name", "Quantity", "Total Price", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -244,6 +246,7 @@ public class CustomerSheet extends javax.swing.JPanel {
         f=(Order)result.next();
         if(!f.getStatus().equals("Not Started")){
             JOptionPane.showMessageDialog(this,"Order cannot be cancelled now");
+            db.close();
             return;
             
         }
