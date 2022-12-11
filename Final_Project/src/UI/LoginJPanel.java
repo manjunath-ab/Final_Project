@@ -139,11 +139,17 @@ public class LoginJPanel extends javax.swing.JPanel {
         //conditons to redirect to sys,comm,hos,doc and patient
         //starting with sys:
         //for this application we need to add everything in one button functionality
-        if((txtUserName.getText().equals("locator"))&&(txtPass.getText().equals("123"))){
-            LocatorJPanel locPanel=new LocatorJPanel();
-            MainJFrame.splitPane.setRightComponent(locPanel);
-        }
-        else if((txtUserName.getText().equals("Restaurant Admin"))&&(txtPass.getText().equals("123"))){
+        /*if((txtUserName.getText().equals("Customer Service Admin"))&&(txtPass.getText().equals("123"))){
+             RestaurantAdminJpanel jPanel=new RestaurantAdminJpanel();
+             splitPane.setRightComponent(jPanel);
+             return;
+        }*/
+        /*else if((txtUserName.getText().equals("Vendor Admin"))&&(txtPass.getText().equals("123"))){
+             RestaurantAdminJpanel jPanel=new RestaurantAdminJpanel();
+             splitPane.setRightComponent(jPanel);
+             return;
+        }*/
+        /*else*/ if((txtUserName.getText().equals("Restaurant Admin"))&&(txtPass.getText().equals("123"))){
              RestaurantAdminJpanel jPanel=new RestaurantAdminJpanel();
              splitPane.setRightComponent(jPanel);
              return;

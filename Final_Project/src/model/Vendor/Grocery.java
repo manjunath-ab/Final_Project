@@ -12,7 +12,15 @@ public class Grocery {
     private String name;
     private int stallid;
     private float price;
+    private int id;
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public float getPrice() {
         return price;
     }

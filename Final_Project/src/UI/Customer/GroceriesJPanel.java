@@ -90,7 +90,7 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         btnPlaceOrder = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        spinnerQuant = new javax.swing.JSpinner();
+        sQuant = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -159,7 +159,7 @@ public class GroceriesJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(spinnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(69, 69, 69)
                                 .addComponent(btnPlaceOrder)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -172,7 +172,7 @@ public class GroceriesJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spinnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(btnPlaceOrder))
                 .addContainerGap(130, Short.MAX_VALUE))
@@ -199,6 +199,8 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         newOrder.setSourceid(selectedItem.getStallid());
         newOrder.setOrderID(generateID());
         newOrder.setLocation(location);
+        newOrder.setQuantity(Integer.parseInt(String.valueOf(sQuant.getValue())));
+        newOrder.setTotalPrice(selectedItem.getPrice()*newOrder.getQuantity());
         db.store(newOrder);
         db.commit();
         db.close();
@@ -213,6 +215,6 @@ public class GroceriesJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JSpinner spinnerQuant;
+    private javax.swing.JSpinner sQuant;
     // End of variables declaration//GEN-END:variables
 }

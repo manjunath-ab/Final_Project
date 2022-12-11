@@ -7,10 +7,12 @@ package UI.Restaurant;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Restaurant.FoodItem;
 import model.Restaurant.Restaurant;
+import model.UniqueID;
 
 /**
  *
@@ -29,6 +31,26 @@ public class CRUDRestaurant extends javax.swing.JPanel {
         db.close();
         populateTable();
         
+    }
+    private int generateID(){
+        // create instance of Random class
+        Random rand = new Random();
+        ObjectContainer db = Db4o.openFile("uniqueid.db4o");
+        // Generate random integers in range 0 to 999
+        int rand_int = rand.nextInt(1000);
+        ObjectSet result = db.queryByExample(UniqueID.class);
+        while (result.hasNext()) {
+           UniqueID u=(UniqueID) result.next();
+           if(rand_int==u.getId()){
+               generateID();
+           }      
+        }
+        UniqueID uid=new UniqueID();
+        uid.setId(rand_int);
+        db.store(uid);
+        db.commit();
+        db.close();
+        return rand_int;
     }
     private void populateTable(){
         
@@ -218,6 +240,7 @@ public class CRUDRestaurant extends javax.swing.JPanel {
         newFoodItem.setDescription(txtDescription.getText());
         newFoodItem.setRestaurantid(r.getId());
         newFoodItem.setPrice(Integer.parseInt(txtPrice.getText()));
+        newFoodItem.setId(generateID());
         ObjectContainer db = Db4o.openFile("fooditems.db4o");
         db.store(newFoodItem);
         db.commit();

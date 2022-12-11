@@ -4,7 +4,7 @@
  */
 package UI.RestaurantAdmin;
 
-import UI.Restaurant.CRUDRestaurant;
+import UI.Restaurant.RestaurantJPanel;
 import UI.MainJFrame;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
@@ -12,6 +12,7 @@ import com.db4o.ObjectSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Restaurant.Restaurant;
+import model.UserLogin.UserLogin;
 
 /**
  *
@@ -27,17 +28,16 @@ public class RestaurantAdminJpanel extends javax.swing.JPanel {
         populateTable();
     }
     private void populateTable(){
-        ObjectContainer db = Db4o.openFile("restaurant.db4o");
+        ObjectContainer db = Db4o.openFile("userlogin.db4o");
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        ObjectSet result = db.queryByExample(Restaurant.class);
+        ObjectSet result = db.queryByExample(UserLogin.class);
         while (result.hasNext()) {
-        Restaurant r = (Restaurant) result.next();            
+        UserLogin r = (UserLogin) result.next();            
             Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
             row[0]=r;//1st column stores object names so..they get deleted
-            row[1]=r.getCuisine();
-            row[2]=r.getLocation();
+            
             
             model.addRow(row);
             
@@ -65,13 +65,13 @@ public class RestaurantAdminJpanel extends javax.swing.JPanel {
         jTable1.setBackground(new java.awt.Color(128, 128, 128));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Restaurant Name", "Cuisine", "Location"
+                "Restaurant Owners"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -112,24 +112,24 @@ public class RestaurantAdminJpanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(279, 279, 279)
                         .addComponent(btnManage))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
+                        .addGap(92, 92, 92)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(126, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(btnManage)
                 .addGap(105, 105, 105))
         );
@@ -140,14 +140,14 @@ public class RestaurantAdminJpanel extends javax.swing.JPanel {
         int selectedRowIndex = jTable1.getSelectedRow();
         
         if (selectedRowIndex<0){
-            JOptionPane.showMessageDialog(this,"Please select a Restaurant");
+            JOptionPane.showMessageDialog(this,"Please select a user");
             return;
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
-        Restaurant selectedRestaurant= (Restaurant) model.getValueAt(selectedRowIndex,0);
+        UserLogin selected= (UserLogin) model.getValueAt(selectedRowIndex,0);
         //figure a way to properly link menu per restaurant model
-        CRUDRestaurant crudPanel = new CRUDRestaurant(selectedRestaurant);
+        RestaurantJPanel crudPanel = new RestaurantJPanel(selected.getUserName());
         //code to move to next JPanel
         //SearchJPanel1 searchJPanel1=new SearchJPanel1(selectedCommunity);
         //searchJPanel1.setVisible(true);
