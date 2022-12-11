@@ -20,6 +20,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
     public RegisterJPanel() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,6 +145,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
+    
+    //register button
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         //put validation for unique username
@@ -165,7 +168,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
            
         }
-        //validation case
+        
+      // valiation case 
         if(txtUsername.getText().isEmpty()||txtPass.getText().isEmpty()){
             
             
