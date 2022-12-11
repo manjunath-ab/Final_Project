@@ -233,6 +233,8 @@ public class VendorJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    
+    //register button
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = jTable1.getSelectedRow();
