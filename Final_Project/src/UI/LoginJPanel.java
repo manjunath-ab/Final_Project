@@ -15,6 +15,7 @@ import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import UI.RestaurantAdmin.RestaurantAdminJpanel;
+import UI.VendorAdmin.VendorAdminJPanel;
 import javax.swing.JOptionPane;
 
 /**
@@ -140,16 +141,16 @@ public class LoginJPanel extends javax.swing.JPanel {
         //starting with sys:
         //for this application we need to add everything in one button functionality
         /*if((txtUserName.getText().equals("Customer Service Admin"))&&(txtPass.getText().equals("123"))){
-             RestaurantAdminJpanel jPanel=new RestaurantAdminJpanel();
+             CustomerService jPanel=new CustomerService();
              splitPane.setRightComponent(jPanel);
              return;
         }*/
-        /*else if((txtUserName.getText().equals("Vendor Admin"))&&(txtPass.getText().equals("123"))){
-             RestaurantAdminJpanel jPanel=new RestaurantAdminJpanel();
+        if((txtUserName.getText().equals("Vendor Admin"))&&(txtPass.getText().equals("123"))){
+             VendorAdminJPanel jPanel=new VendorAdminJPanel();
              splitPane.setRightComponent(jPanel);
              return;
-        }*/
-        /*else*/ if((txtUserName.getText().equals("Restaurant Admin"))&&(txtPass.getText().equals("123"))){
+        }
+        else if((txtUserName.getText().equals("Restaurant Admin"))&&(txtPass.getText().equals("123"))){
              RestaurantAdminJpanel jPanel=new RestaurantAdminJpanel();
              splitPane.setRightComponent(jPanel);
              return;
