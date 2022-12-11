@@ -44,7 +44,7 @@ public class DAJPanel extends javax.swing.JPanel {
         ObjectSet result=query.execute();
         while(result.hasNext()){
         Order o = (Order) result.next(); 
-        Object[] row = new Object[100];//2 members for now
+        Object[] row = new Object[1000];//2 members for now
             //row[0]=e.getName();
             row[1]=o;//1st column stores object names so..they get deleted
             row[0]=o.getOrderID();

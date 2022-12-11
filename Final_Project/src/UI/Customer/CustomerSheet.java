@@ -224,6 +224,23 @@ public class CustomerSheet extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        Order f= (Order) model.getValueAt(selectedRowIndex,1);
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+       //List <Order> result=db.queryByExample(selectedOrder);
+        ObjectSet result = db.queryByExample(f);
+        f=(Order)result.next();
+        if(!f.getStatus().equals("Delivered")){
+            JOptionPane.showMessageDialog(this,"Issue cannot be filed until status changes to delivered");
+            db.close();
+            return;
+            
+        }
+        f.setStatus("Query");
+        db.store(f);
+        db.commit();
+        db.close();
+        JOptionPane.showMessageDialog(this,"Query has been issued");
+        populateTable();
         //getting the whole object to manipulate
         //Customer service admin flow
         //Restaurant selectedRestaurant= (Restaurant) model.getValueAt(selectedRowIndex,0);
