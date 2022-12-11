@@ -4,6 +4,17 @@
  */
 package UI.CutomerService;
 
+import com.db4o.Db4o;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.query.Query;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Order.Order;
+import Map.ViewMap;
+import static UI.MainJFrame.splitPane;
+import com.db4o.query.Constraint;
+
 /**
  *
  * @author smrithijagithyala
@@ -13,9 +24,37 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CustomerServiceJPanel
      */
+    String username;
     public CustomerServiceJPanel(String username) {
         initComponents();
+        this.username = username;
+        populateTable();
     }
+    
+     private void populateTable(){
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        Query query = db.query();
+        query.constrain(Order.class);
+        Constraint constr = query.descend("status").constrain("Query");
+        //query.descend("orderOwner").constrain("Queiry").and(constr);
+        ObjectSet result=query.execute();
+        while (result.hasNext()) {
+        Order f = (Order) result.next();            
+            Object[] row = new Object[100];//2 members for now
+            //row[0]=e.getName();
+            //1st column stores object names so..they get deleted
+            row[0]=f.getOrderID();
+            row[2]=f.getStatus();
+            row[1]=f;
+            //row[3]=f.getLocation();
+            model.addRow(row);
+            
+        }
+        db.close();
+    }
+   
 
     
 
@@ -63,6 +102,11 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         });
 
         jButton1.setText("Get Details");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Name on Order:");
 
@@ -139,9 +183,47 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
 
     private void btnResolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResolveActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
         
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select an order");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,1);
+        //modify data of the object in the db
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+        ObjectSet result = db.queryByExample(selectedOrder);
+        selectedOrder=(Order)result.get(0);
+        //print message delivery is started then poulate table 
+        selectedOrder.setStatus("Resolved");
+        db.store(selectedOrder);
+        db.close();
+        JOptionPane.showMessageDialog(this,"Query Resolved");
+        populateTable();
         
     }//GEN-LAST:event_btnResolveActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select an order");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,1);
+        //modify data of the object in the db
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+        ObjectSet result = db.queryByExample(selectedOrder);
+        selectedOrder=(Order)result.get(0);
+        txtName.setText(selectedOrder.getOwnerName());
+        txtItem.setText(selectedOrder.getItem());
+        txtAgent.setText(selectedOrder.getDagent());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
