@@ -90,10 +90,11 @@ public class VendorJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnSelect = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        txtLocation = new javax.swing.JTextField();
         btnRegister = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        cbLocation = new javax.swing.JComboBox<>();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 51));
 
@@ -125,14 +126,6 @@ public class VendorJPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Location");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtLocation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLocationActionPerformed(evt);
-            }
-        });
-
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +145,22 @@ public class VendorJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 42, Short.MAX_VALUE)
         );
+
+        cbLocation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allston", "Back Bay", "Bay Village", "Beacon Hill", "Brighton", "Charlestown", "Chinatown–Leather District", "Dorchester", "Downtown", "East Boston", "Fenway-Kenmore", "Hyde Park", "Jamaica Plain", "Mattapan", "Mission Hill", "North End", "Roslindale", "Roxbury", "South Boston", "South End", "West End", "West Roxbury", "Wharf District" }));
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -173,10 +182,8 @@ public class VendorJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(75, 75, 75)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(73, 73, 73)
+                                .addComponent(cbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(72, 72, 72)
@@ -184,8 +191,15 @@ public class VendorJPanel extends javax.swing.JPanel {
                 .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnRegister)
-                .addGap(295, 295, 295))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnRegister)
+                        .addGap(66, 66, 66)
+                        .addComponent(btnDelete)
+                        .addGap(154, 154, 154))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnUpdate)
+                        .addGap(139, 139, 139))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,28 +216,27 @@ public class VendorJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUpdate)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(btnRegister)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegister)
+                    .addComponent(btnDelete))
                 .addGap(253, 253, 253)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLocationActionPerformed
-
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         GroceryStall newStall= new GroceryStall();
         newStall.setOwnerUsername(username);
-        newStall.setLocation(txtLocation.getText());
+        newStall.setLocation(cbLocation.getItemAt(cbLocation.getSelectedIndex()));
         newStall.setName(txtName.getText());
         newStall.setId(generateID());
         ObjectContainer db = Db4o.openFile("grocerystall.db4o");
@@ -254,18 +267,64 @@ public class VendorJPanel extends javax.swing.JPanel {
         MainJFrame.splitPane.setRightComponent(crudPanel);
     }//GEN-LAST:event_btnSelectActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select an Stall");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        GroceryStall f= (GroceryStall) model.getValueAt(selectedRowIndex,0);
+        ObjectContainer db = Db4o.openFile("grocerystall.db4o");
+       //List <Order> result=db.queryByExample(selectedOrder);
+        ObjectSet result = db.queryByExample(f);
+        f=(GroceryStall)result.next();
+        db.delete(f);
+        db.close();
+        JOptionPane.showMessageDialog(this,"Item Deleted");
+        populateTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this,"Please select a stall");
+            return;
+        }
+        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        //getting the whole object to manipulate
+        GroceryStall f= (GroceryStall) model.getValueAt(selectedRowIndex,0);
+        ObjectContainer db = Db4o.openFile("grocerystall.db4o");
+       //List <Order> result=db.queryByExample(selectedOrder);
+        ObjectSet result = db.queryByExample(f);
+        f=(GroceryStall)result.next();
+        f.setName(txtName.getText());
+       
+        f.setLocation(cbLocation.getItemAt(cbLocation.getSelectedIndex()));
+        db.store(f);
+        db.close();
+        JOptionPane.showMessageDialog(this,"Item Updated");
+        populateTable();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnSelect;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cbLocation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }
