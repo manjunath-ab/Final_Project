@@ -4,6 +4,7 @@
  */
 package UI.Customer;
 import UI.Customer.CustomerJPanel;
+import UI.Delivery.DADJpanel;
 import static UI.MainJFrame.splitPane;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
@@ -31,7 +32,7 @@ public class CustomerSheet extends javax.swing.JPanel {
     }
     private void populateTable(){
         ObjectContainer db = Db4o.openFile("orders.db4o");
-        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model= (DefaultTableModel) CustomerSheetTable.getModel();
         model.setRowCount(0);
         Query query = db.query();
         query.constrain(Order.class);
@@ -44,7 +45,7 @@ public class CustomerSheet extends javax.swing.JPanel {
             row[0]=r.getOrderID();//1st column stores object names so..they get deleted
             row[1]=r;
             row[2]=r.getStatus();
-            
+                
             model.addRow(row);
             
         }
@@ -67,7 +68,7 @@ public class CustomerSheet extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        CustomerSheetTable = new javax.swing.JTable();
         btnRaiseReq = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -85,7 +86,13 @@ public class CustomerSheet extends javax.swing.JPanel {
 
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
+<<<<<<< HEAD
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Name on Order");
 
@@ -94,6 +101,9 @@ public class CustomerSheet extends javax.swing.JPanel {
 
         jTable1.setBackground(new java.awt.Color(128, 128, 128));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
+=======
+        CustomerSheetTable.setModel(new javax.swing.table.DefaultTableModel(
+>>>>>>> a7868ce2a617fcd3bf188568a196929509fc7c41
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -104,7 +114,7 @@ public class CustomerSheet extends javax.swing.JPanel {
                 "Order ID", "Item Name", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(CustomerSheetTable);
 
         btnRaiseReq.setBackground(new java.awt.Color(0, 102, 204));
         btnRaiseReq.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,20 +213,38 @@ public class CustomerSheet extends javax.swing.JPanel {
 
     private void btnRaiseReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseReqActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = jTable1.getSelectedRow();
+        int selectedRowIndex = CustomerSheetTable.getSelectedRow();
         
         if (selectedRowIndex<0){
             JOptionPane.showMessageDialog(this,"Please select an order");
             return;
         }
-        DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model= (DefaultTableModel) CustomerSheetTable.getModel();
         //getting the whole object to manipulate
-        //Customer service admin flow
-        //Restaurant selectedRestaurant= (Restaurant) model.getValueAt(selectedRowIndex,0);
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,1);
+        //modify data of the object in the db
+        ObjectContainer db = Db4o.openFile("orders.db4o");
+        ObjectSet result = db.queryByExample(selectedOrder);
+        selectedOrder=(Order)result.get(0);
+        //print message delivery is started then poulate table
+        selectedOrder.setStatus("Query");
+        db.store(selectedOrder);
+        db.close();
+        JOptionPane.showMessageDialog(this,"Query Registered");
+        populateTable();
+        
+        
+        
+        
     }//GEN-LAST:event_btnRaiseReqActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable CustomerSheetTable;
     private javax.swing.JButton btnRaiseReq;
     private javax.swing.JButton btnStartOrder;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -225,7 +253,6 @@ public class CustomerSheet extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

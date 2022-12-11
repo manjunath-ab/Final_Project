@@ -135,15 +135,24 @@ public class DADJpanel extends javax.swing.JPanel {
                         .addGap(104, 104, 104)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                         .addGap(228, 228, 228)
                         .addComponent(btnGetMap)
                         .addGap(75, 75, 75)
                         .addComponent(btnDelivered)))
                 .addContainerGap(107, Short.MAX_VALUE))
+=======
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnGetMap)))
+                .addContainerGap(56, Short.MAX_VALUE))
+>>>>>>> a7868ce2a617fcd3bf188568a196929509fc7c41
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,6 +161,20 @@ public class DADJpanel extends javax.swing.JPanel {
                     .addComponent(btnGetMap)
                     .addComponent(btnDelivered))
                 .addContainerGap(90, Short.MAX_VALUE))
+=======
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnGetMap))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50)
+                .addComponent(btnDelivered)
+                .addContainerGap(189, Short.MAX_VALUE))
+>>>>>>> a7868ce2a617fcd3bf188568a196929509fc7c41
         );
     }// </editor-fold>//GEN-END:initComponents
 

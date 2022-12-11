@@ -51,8 +51,12 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
         });
 
+<<<<<<< HEAD
         cbType.setBackground(new java.awt.Color(128, 128, 128));
         cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Agent", "Customer", " " }));
+=======
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Agent", "Customer", "Customer Service", " " }));
+>>>>>>> a7868ce2a617fcd3bf188568a196929509fc7c41
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
