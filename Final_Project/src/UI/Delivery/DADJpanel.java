@@ -155,6 +155,8 @@ public class DADJpanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //delivered button
     private void btnDeliveredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveredActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = jTable1.getSelectedRow();
@@ -178,6 +180,8 @@ public class DADJpanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnDeliveredActionPerformed
 
+    
+    //map button
     private void btnGetMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetMapActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = jTable1.getSelectedRow();
