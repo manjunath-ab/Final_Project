@@ -5,6 +5,7 @@
 package UI;
 
 import UI.Customer.CustomerSheet;
+import UI.CutomerService.CustomerServiceJPanel;
 import UI.Delivery.DAJPanel;
 import UI.Vendor.VendorJPanel;
 import UI.Restaurant.RestaurantJPanel;
@@ -186,8 +187,8 @@ public class LoginJPanel extends javax.swing.JPanel {
                        return;
                    }
                    
-                   case "Customer Service" -> {
-                       CustomerServiceJPanel csPanel=new CustomerServiceJPanel(txtUserName.getText());
+                    case "Customer Service" -> {
+                       CustomerServiceJPanel csPanel = new CustomerServiceJPanel(txtUserName.getText());
                        db.close();
                        splitPane.setRightComponent(csPanel);
                        return;
