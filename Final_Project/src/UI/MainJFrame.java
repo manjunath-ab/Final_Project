@@ -131,6 +131,7 @@ public class MainJFrame extends javax.swing.JFrame {
         RegisterJPanel regPanel=new RegisterJPanel();
         
         splitPane.setRightComponent(regPanel);
+        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**

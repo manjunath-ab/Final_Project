@@ -207,7 +207,7 @@ public class CRUDVendor extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     
-    //add button
+    //add button 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPriceActionPerformed

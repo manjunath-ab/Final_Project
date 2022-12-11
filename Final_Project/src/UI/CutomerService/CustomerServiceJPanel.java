@@ -203,6 +203,7 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"Query Resolved");
         populateTable();
         
+        
     }//GEN-LAST:event_btnResolveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

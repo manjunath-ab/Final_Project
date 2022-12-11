@@ -234,7 +234,7 @@ public class FoodJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
     
-    //Drop location button 
+    //Set Drop location button 
     private void btnFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFromActionPerformed
         // TODO add your handling code here:
         Map.PickLocation jpanel= new Map.PickLocation(r,username,name,location);
