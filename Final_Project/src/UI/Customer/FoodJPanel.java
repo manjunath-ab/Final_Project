@@ -97,7 +97,7 @@ public class FoodJPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         btnPlaceOrder = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        spinnnerQuant = new javax.swing.JSpinner();
+        sQuant = new javax.swing.JSpinner();
         btnFrom = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -169,7 +169,7 @@ public class FoodJPanel extends javax.swing.JPanel {
                 .addGap(189, 189, 189)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(spinnnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(131, 131, 131)
                 .addComponent(btnFrom)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -190,10 +190,11 @@ public class FoodJPanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spinnnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFrom)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnFrom)
+                        .addComponent(jLabel2)))
                 .addGap(23, 23, 23)
                 .addComponent(btnPlaceOrder)
                 .addContainerGap(85, Short.MAX_VALUE))
@@ -222,6 +223,9 @@ public class FoodJPanel extends javax.swing.JPanel {
         newOrder.setOrderID(generateID());
         newOrder.setToLat(lat);
         newOrder.setToLong(longi);
+        newOrder.setQuantity(Integer.parseInt(String.valueOf(sQuant.getValue())));
+        newOrder.setTotalPrice(selectedItem.getPrice()*newOrder.getQuantity());
+        newOrder.setItemID(selectedItem.getId());
         System.out.print(lat);
         System.out.print(longi);
         db.store(newOrder);
@@ -247,6 +251,6 @@ public class FoodJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JSpinner spinnnerQuant;
+    private javax.swing.JSpinner sQuant;
     // End of variables declaration//GEN-END:variables
 }

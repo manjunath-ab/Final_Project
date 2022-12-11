@@ -6,6 +6,8 @@ package Map;
 
 
 
+import UI.Delivery.DADJpanel;
+import static UI.MainJFrame.splitPane;
 import java.util.HashSet;
 import java.util.Set;
 import org.jxmapviewer.OSMTileFactoryInfo;
@@ -27,15 +29,17 @@ public class ViewMap extends javax.swing.JPanel {
     /**
      * Creates new form ViewMap
      */
+    String username;
     double lat;
     double longi;
     private final Set<MyWaypoint> waypoints = new HashSet<>();
     private EventWaypoint event;
-    public ViewMap(double lat,double longi) {
+    public ViewMap(double lat,double longi,String username) {
         initComponents();
         init();
         this.lat=lat;
         this.longi=longi;
+        this.username=username;
         System.out.print(lat);
     }
         private void init() {
@@ -85,6 +89,7 @@ public class ViewMap extends javax.swing.JPanel {
         cmdAdd = new javax.swing.JButton();
         cmdClear = new javax.swing.JButton();
         comboMapType = new javax.swing.JComboBox<>();
+        btnReturn = new javax.swing.JButton();
 
         cmdAdd.setText("View Delivery Point");
         cmdAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -107,17 +112,29 @@ public class ViewMap extends javax.swing.JPanel {
             }
         });
 
+        btnReturn.setText("Return");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jXMapViewerLayout = new javax.swing.GroupLayout(jXMapViewer);
         jXMapViewer.setLayout(jXMapViewerLayout);
         jXMapViewerLayout.setHorizontalGroup(
             jXMapViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXMapViewerLayout.createSequentialGroup()
+            .addGroup(jXMapViewerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmdAdd)
-                .addGap(18, 18, 18)
-                .addComponent(cmdClear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                .addComponent(comboMapType, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jXMapViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXMapViewerLayout.createSequentialGroup()
+                        .addComponent(cmdAdd)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmdClear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                        .addComponent(comboMapType, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXMapViewerLayout.createSequentialGroup()
+                        .addComponent(btnReturn)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jXMapViewerLayout.setVerticalGroup(
@@ -128,7 +145,9 @@ public class ViewMap extends javax.swing.JPanel {
                     .addComponent(comboMapType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdAdd)
                     .addComponent(cmdClear))
-                .addContainerGap(425, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 387, Short.MAX_VALUE)
+                .addComponent(btnReturn)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -174,8 +193,15 @@ public class ViewMap extends javax.swing.JPanel {
         jXMapViewer.setTileFactory(tileFactory);
     }//GEN-LAST:event_comboMapTypeActionPerformed
 
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        // TODO add your handling code here:
+        DADJpanel panel=new DADJpanel(username);
+        splitPane.setRightComponent(panel);
+    }//GEN-LAST:event_btnReturnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReturn;
     private javax.swing.JButton cmdAdd;
     private javax.swing.JButton cmdClear;
     private javax.swing.JComboBox<String> comboMapType;

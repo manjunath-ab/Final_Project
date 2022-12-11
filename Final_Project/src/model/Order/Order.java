@@ -24,7 +24,24 @@ public class Order {
     private int quantity;
     private double toLat;
     private double toLong;
+    private float totalPrice;
+    private int itemID;
 
+    public int getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
+    }
+
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
     public double getToLat() {
         return toLat;
     }

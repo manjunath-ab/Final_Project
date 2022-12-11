@@ -45,8 +45,10 @@ public class DADJpanel extends javax.swing.JPanel {
             //row[0]=e.getName();
             row[0]=f;//1st column stores object names so..they get deleted
             row[1]=f.getOrderID();
-            row[2]=f.getStatus();
-            //row[3]=f.getLocation();
+            row[2]=f.getItemID();
+            row[3]=f.getQuantity();
+            row[4]=f.getOwnerName();
+            row[5]=f.getStatus();
             model.addRow(row);
             
         }
@@ -74,13 +76,13 @@ public class DADJpanel extends javax.swing.JPanel {
         jTable1.setBackground(new java.awt.Color(128, 128, 128));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Item Name", "Status", "Name of Orderer", "Delivery Address"
+                "Order ID", "Item Name", "Item ID", "Quantity", "Name of recipient", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -132,14 +134,14 @@ public class DADJpanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(228, 228, 228)
                         .addComponent(btnGetMap)
                         .addGap(75, 75, 75)
-                        .addComponent(btnDelivered)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addComponent(btnDelivered))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +191,7 @@ public class DADJpanel extends javax.swing.JPanel {
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
         Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
-        ViewMap jpanel = new ViewMap(selectedOrder.getToLat(),selectedOrder.getToLong());
+        ViewMap jpanel = new ViewMap(selectedOrder.getToLat(),selectedOrder.getToLong(),username);
         splitPane.setRightComponent(jpanel);
     }//GEN-LAST:event_btnGetMapActionPerformed
 

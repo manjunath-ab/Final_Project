@@ -13,6 +13,15 @@ public class FoodItem {
     private String description;
     private int restaurantid;
     private float price;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public float getPrice() {
         return price;
