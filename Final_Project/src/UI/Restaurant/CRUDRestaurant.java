@@ -4,6 +4,8 @@
  */
 package UI.Restaurant;
 
+import static UI.MainJFrame.splitPane;
+import UI.Validate;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -24,9 +26,11 @@ public class CRUDRestaurant extends javax.swing.JPanel {
      * Creates new form CRUDRestaurant
      */
     Restaurant r;
+    Validate validate;
     public CRUDRestaurant(Restaurant r) {
         initComponents();
         this.r=r;
+        this.validate = new Validate();
         ObjectContainer db = Db4o.openFile("fooditems.db4o");
         db.close();
         populateTable();
@@ -95,6 +99,7 @@ public class CRUDRestaurant extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 51));
@@ -151,20 +156,33 @@ public class CRUDRestaurant extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ADD FOOD ITEMS:");
 
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("<");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(229, 229, 229)
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(179, 179, 179)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -235,17 +253,38 @@ public class CRUDRestaurant extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        boolean validation = true;
+        String name = txtName.getText();
+        String description = txtDescription.getText();
+        String price = txtPrice.getText();
+        if (validate.isEmptyOrNull(price) 
+                || !validate.isNumeric(price)
+                ){validation = false;
+                  JOptionPane.showMessageDialog(this,"Price Should be a numeric value and should not be empty or null");
+  
+        }if(validate.isEmptyOrNull(description)){
+                    validation = false;
+                  JOptionPane.showMessageDialog(this,"Description Should not be empty or null");
+ 
+        }
+        if(validate.isEmptyOrNull(name)){
+                    validation = false;
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+ 
+        }if(validation) {
         FoodItem newFoodItem= new FoodItem();
-        newFoodItem.setName(txtName.getText());
-        newFoodItem.setDescription(txtDescription.getText());
+        newFoodItem.setName(name);
+        newFoodItem.setDescription(description);
         newFoodItem.setRestaurantid(r.getId());
-        newFoodItem.setPrice(Integer.parseInt(txtPrice.getText()));
+        newFoodItem.setPrice(Integer.parseInt(price));
         newFoodItem.setId(generateID());
+        
         ObjectContainer db = Db4o.openFile("fooditems.db4o");
         db.store(newFoodItem);
         db.commit();
         db.close();
         populateTable();
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
@@ -277,12 +316,32 @@ public class CRUDRestaurant extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        
         int selectedRowIndex = jTable1.getSelectedRow();
         
         if (selectedRowIndex<0){
             JOptionPane.showMessageDialog(this,"Please select an Item");
             return;
         }
+        boolean validation = true;
+        String name = txtName.getText();
+        String description = txtDescription.getText();
+        String price = txtPrice.getText();
+        if (validate.isEmptyOrNull(price) 
+                || !validate.isNumeric(price)
+                ){validation = false;
+                  JOptionPane.showMessageDialog(this,"Price Should be a numeric value and should not be empty or null");
+  
+        }if(validate.isEmptyOrNull(description)){
+                    validation = false;
+                  JOptionPane.showMessageDialog(this,"Description Should not be empty or null");
+ 
+        }
+        if(validate.isEmptyOrNull(name)){
+                    validation = false;
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+        }if(validation){
+        
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
         FoodItem f= (FoodItem) model.getValueAt(selectedRowIndex,0);
@@ -290,20 +349,27 @@ public class CRUDRestaurant extends javax.swing.JPanel {
        //List <Order> result=db.queryByExample(selectedOrder);
         ObjectSet result = db.queryByExample(f);
         f=(FoodItem)result.next();
-        f.setName(txtName.getText());
-        f.setPrice(Float.parseFloat(txtPrice.getText()));
-        f.setDescription(txtDescription.getText());
+        f.setName(name);
+        f.setPrice(Float.parseFloat(price));
+        f.setDescription(description);
         db.store(f);
         db.close();
         JOptionPane.showMessageDialog(this,"Item Updated");
         populateTable();
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RestaurantJPanel res = new RestaurantJPanel("");  
+        splitPane.setRightComponent(res);// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -5,6 +5,7 @@
 package UI.Restaurant;
 
 import UI.MainJFrame;
+import UI.Validate;
 import com.db4o.Db4o;
 import javax.swing.table.DefaultTableModel;
 //import static UI.MainJFrame.db;
@@ -29,6 +30,7 @@ public class RestaurantJPanel extends javax.swing.JPanel {
      */
     
     String username;
+    Validate validate = new Validate();
     public RestaurantJPanel(String u) {
         initComponents();
         username=u;
@@ -43,6 +45,8 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         
         
     }
+    
+    
     private void autopopulate(ObjectContainer db){
         Restaurant newObj=new Restaurant();
         newObj.setOwnerUsername(username);
@@ -78,6 +82,8 @@ public class RestaurantJPanel extends javax.swing.JPanel {
 
  }
     }
+    
+    
     */
     private void populateTable(){
         ObjectContainer db = Db4o.openFile("restaurant.db4o");
@@ -382,12 +388,17 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         ObjectSet result = db.queryByExample(f);
         f=(Restaurant)result.next();
         f.setName(txtName.getText());
-        f.setCuisine(cbCuisine.getItemAt(cbCuisine.getSelectedIndex()));
-        f.setLocation(cbLocation.getItemAt(cbLocation.getSelectedIndex()));
-        db.store(f);
-        db.close();
-        JOptionPane.showMessageDialog(this,"Item Updated");
-        populateTable();
+        if(validate.isEmptyOrNull(f.getName())){
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+  
+        }else {
+            f.setCuisine(cbCuisine.getItemAt(cbCuisine.getSelectedIndex()));
+            f.setLocation(cbLocation.getItemAt(cbLocation.getSelectedIndex()));
+            db.store(f);
+            db.close();
+            JOptionPane.showMessageDialog(this,"Item Updated");
+            populateTable();
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 
