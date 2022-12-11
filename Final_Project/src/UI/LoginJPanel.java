@@ -185,6 +185,14 @@ public class LoginJPanel extends javax.swing.JPanel {
                        splitPane.setRightComponent(daPanel);
                        return;
                    }
+                   
+                   case "Customer Service" -> {
+                       CustomerServiceJPanel csPanel=new CustomerServiceJPanel(txtUserName.getText());
+                       db.close();
+                       splitPane.setRightComponent(csPanel);
+                       return;
+                   }
+                   
                    default -> {
                        JOptionPane.showMessageDialog(this,"Check User Type");
                        db.close();

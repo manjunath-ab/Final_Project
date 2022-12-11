@@ -52,7 +52,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         });
 
         cbType.setBackground(new java.awt.Color(128, 128, 128));
-        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Agent", "Customer", " " }));
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Agent", "Customer", "Customer Service" }));
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

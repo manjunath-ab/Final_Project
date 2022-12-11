@@ -103,7 +103,7 @@
             <StringItem index="1" value="Vendor"/>
             <StringItem index="2" value="Delivery Agent"/>
             <StringItem index="3" value="Customer"/>
-            <StringItem index="4" value=" "/>
+            <StringItem index="4" value="Customer Service"/>
           </StringArray>
         </Property>
       </Properties>
