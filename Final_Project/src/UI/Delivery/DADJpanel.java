@@ -35,6 +35,8 @@ public class DADJpanel extends javax.swing.JPanel {
         ObjectContainer db = Db4o.openFile("orders.db4o");
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
+        
+        
         Query query = db.query();
         query.constrain(Order.class);
         query.descend("dagent").constrain(username);
