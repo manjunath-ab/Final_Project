@@ -4,6 +4,7 @@
  */
 package UI.Vendor;
 
+import UI.Validate;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -24,9 +25,11 @@ public class CRUDVendor extends javax.swing.JPanel {
      * Creates new form CRUDVendor
      */
     GroceryStall g;
+    Validate validate;
     public CRUDVendor(GroceryStall g) {
         initComponents();
         this.g=g;
+        this.validate = new Validate();
         ObjectContainer db = Db4o.openFile("groceries.db4o");
         db.close();
         populateTable();
@@ -225,6 +228,19 @@ public class CRUDVendor extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        boolean validation = true;
+        String name = txtName.getText();
+        String price = txtPrice.getText();
+        if (validate.isEmptyOrNull(price) 
+                || !validate.isNumeric(price)
+                ){validation = false;
+                  JOptionPane.showMessageDialog(this,"Price Should be a numeric value and should not be empty or null");
+        }
+        if(validate.isEmptyOrNull(name)){
+                    validation = false;
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+ 
+        }if(validation){
         Grocery newGrocery= new Grocery();
         newGrocery.setName(txtName.getText());
         newGrocery.setStallid(g.getId());
@@ -235,6 +251,7 @@ public class CRUDVendor extends javax.swing.JPanel {
         db.commit();
         db.close();
         populateTable();
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
@@ -270,6 +287,20 @@ public class CRUDVendor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please select an Item");
             return;
         }
+        boolean validation = true;
+        String name = txtName.getText();
+        String price = txtPrice.getText();
+        if (validate.isEmptyOrNull(price) 
+                || !validate.isNumeric(price)
+                ){validation = false;
+                  JOptionPane.showMessageDialog(this,"Price Should be a numeric value and should not be empty or null");
+  
+        }
+        if(validate.isEmptyOrNull(name)){
+                    validation = false;
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+        }if(validation){
+        
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
         Grocery f= (Grocery) model.getValueAt(selectedRowIndex,0);
@@ -284,7 +315,7 @@ public class CRUDVendor extends javax.swing.JPanel {
         db.close();
         JOptionPane.showMessageDialog(this,"Item Updated");
         populateTable();
-
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 

@@ -315,7 +315,12 @@ public class RestaurantJPanel extends javax.swing.JPanel {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         //push a restaurant object into database with key attributes
-        
+        String name = txtName.getText();
+        if(validate.isEmptyOrNull(name)){
+                   
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+        }else
+        {
         Restaurant newRestaurant= new Restaurant();
         newRestaurant.setOwnerUsername(username);
         newRestaurant.setLocation(cbLocation.getItemAt(cbLocation.getSelectedIndex()));
@@ -327,6 +332,7 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         db.commit();
         db.close();
         populateTable();
+        }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed

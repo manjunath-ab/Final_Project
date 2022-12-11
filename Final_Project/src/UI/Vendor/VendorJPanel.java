@@ -5,6 +5,7 @@
 package UI.Vendor;
 
 import UI.MainJFrame;
+import UI.Validate;
 import UI.Vendor.CRUDVendor;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
@@ -25,6 +26,7 @@ public class VendorJPanel extends javax.swing.JPanel {
      * Creates new form VendorJPanel
      */
     String username;
+    Validate validate = new Validate();
     public VendorJPanel(String u) {
         initComponents();
         username=u;
@@ -234,6 +236,12 @@ public class VendorJPanel extends javax.swing.JPanel {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
+        String name = txtName.getText();
+        if(validate.isEmptyOrNull(name)){
+                   
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+        }else
+        {
         GroceryStall newStall= new GroceryStall();
         newStall.setOwnerUsername(username);
         newStall.setLocation(cbLocation.getItemAt(cbLocation.getSelectedIndex()));
@@ -244,6 +252,7 @@ public class VendorJPanel extends javax.swing.JPanel {
         db.commit();
         db.close();
         populateTable();
+        }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
@@ -296,6 +305,10 @@ public class VendorJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please select a stall");
             return;
         }
+        if(validate.isEmptyOrNull(txtName.getText())){
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+  
+        }else {
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
         GroceryStall f= (GroceryStall) model.getValueAt(selectedRowIndex,0);
@@ -310,6 +323,7 @@ public class VendorJPanel extends javax.swing.JPanel {
         db.close();
         JOptionPane.showMessageDialog(this,"Item Updated");
         populateTable();
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 
