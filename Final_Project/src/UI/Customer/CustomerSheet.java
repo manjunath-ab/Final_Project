@@ -170,6 +170,8 @@ public class CustomerSheet extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnStartOrderActionPerformed
 
+    
+    //orderissue button
     private void btnRaiseReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseReqActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = CustomerSheetTable.getSelectedRow();
