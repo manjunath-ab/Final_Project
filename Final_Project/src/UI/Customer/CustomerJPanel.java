@@ -248,7 +248,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         //searchJPanel1.setVisible(true);
         //ObjectContainer db = Db4o.openFile("restaurant.db4o");
         //db1.close();
-        GroceriesJPanel fPanel=new GroceriesJPanel(selectedStall,username,name,location);
+        GroceriesJPanel fPanel=new GroceriesJPanel(selectedStall,username,name,location,0,0);
         MainJFrame.splitPane.setRightComponent(fPanel);
     }//GEN-LAST:event_btnGroceriesActionPerformed
 

@@ -4,6 +4,7 @@
  */
 package UI.Customer;
 
+import static UI.MainJFrame.splitPane;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -28,12 +29,16 @@ public class GroceriesJPanel extends javax.swing.JPanel {
     GroceryStall r;
     String name;
     String location;
-    public GroceriesJPanel(GroceryStall r,String username,String name,String location) {
+    double lat;
+    double longi;
+    public GroceriesJPanel(GroceryStall r,String username,String name,String location,double lat,double longi) {
         initComponents();
         this.r=r;
         this.username=username;
         this.name=name;
         this.location=location;
+        this.lat=lat;
+        this.longi=longi;
         populateTable();
     }
     private int generateID(){
@@ -93,6 +98,7 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         sQuant = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnFrom = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 51));
 
@@ -145,6 +151,15 @@ public class GroceriesJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnFrom.setBackground(new java.awt.Color(0, 102, 204));
+        btnFrom.setForeground(new java.awt.Color(255, 255, 255));
+        btnFrom.setText("Set Drop Location");
+        btnFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFromActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,7 +170,10 @@ public class GroceriesJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(273, 273, 273)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnFrom))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -167,10 +185,15 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(btnFrom)))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -199,6 +222,10 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         newOrder.setSourceid(selectedItem.getStallid());
         newOrder.setOrderID(generateID());
         newOrder.setLocation(location);
+        newOrder.setToLat(lat);
+        System.out.print(lat);
+        System.out.print(longi);
+        newOrder.setToLong(longi);
         newOrder.setQuantity(Integer.parseInt(String.valueOf(sQuant.getValue())));
         newOrder.setTotalPrice(selectedItem.getPrice()*newOrder.getQuantity());
         newOrder.setItemID(selectedItem.getId());
@@ -208,8 +235,16 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"Order Placed");
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
+    private void btnFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFromActionPerformed
+        // TODO add your handling code here:
+        Map.PickLocationGrocery jpanel= new Map.PickLocationGrocery(r,username,name,location);
+        splitPane.setRightComponent(jpanel);
+
+    }//GEN-LAST:event_btnFromActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFrom;
     private javax.swing.JButton btnPlaceOrder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
