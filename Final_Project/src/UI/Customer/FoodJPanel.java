@@ -190,10 +190,11 @@ public class FoodJPanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(spinnnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFrom)
-                    .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnFrom)
+                        .addComponent(jLabel2)))
                 .addGap(23, 23, 23)
                 .addComponent(btnPlaceOrder)
                 .addContainerGap(85, Short.MAX_VALUE))
@@ -231,6 +232,8 @@ public class FoodJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"Order Placed");
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
+    
+    //Drop location button 
     private void btnFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFromActionPerformed
         // TODO add your handling code here:
         Map.PickLocation jpanel= new Map.PickLocation(r,username,name,location);
