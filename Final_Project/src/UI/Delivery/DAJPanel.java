@@ -191,6 +191,8 @@ public class DAJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnGetActionPerformed
 
+    
+    //start delivery button
     private void btnDeliverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliverActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = jTable1.getSelectedRow();
@@ -220,6 +222,8 @@ public class DAJPanel extends javax.swing.JPanel {
         populatebycomm(); 
     }//GEN-LAST:event_btnDeliverActionPerformed
 
+    
+    //my delivery button
     private void btnDeliveriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveriesActionPerformed
         // TODO add your handling code here:
         DADJpanel jpanel=new DADJpanel(username);
