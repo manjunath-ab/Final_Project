@@ -25,12 +25,14 @@ public class CRUDRestaurant extends javax.swing.JPanel {
     /**
      * Creates new form CRUDRestaurant
      */
+    String username;
     Restaurant r;
     Validate validate;
-    public CRUDRestaurant(Restaurant r) {
+    public CRUDRestaurant(Restaurant r,String username) {
         initComponents();
         this.r=r;
         this.validate = new Validate();
+        this.username=username;
         ObjectContainer db = Db4o.openFile("fooditems.db4o");
         db.close();
         populateTable();
@@ -360,7 +362,7 @@ public class CRUDRestaurant extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        RestaurantJPanel res = new RestaurantJPanel("");  
+        RestaurantJPanel res = new RestaurantJPanel(username);  
         splitPane.setRightComponent(res);// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

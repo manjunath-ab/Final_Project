@@ -267,7 +267,7 @@ public class VendorJPanel extends javax.swing.JPanel {
         //getting the whole object to manipulate
         GroceryStall selectedStall= (GroceryStall) model.getValueAt(selectedRowIndex,0);
         //figure a way to properly link menu per restaurant model
-        CRUDVendor crudPanel = new CRUDVendor(selectedStall);
+        CRUDVendor crudPanel = new CRUDVendor(selectedStall,username);
         //code to move to next JPanel
         //SearchJPanel1 searchJPanel1=new SearchJPanel1(selectedCommunity);
         //searchJPanel1.setVisible(true);
