@@ -25,6 +25,15 @@ public class Order {
     private double toLat;
     private double toLong;
     private float totalPrice;
+    private int itemID;
+
+    public int getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
+    }
 
     public float getTotalPrice() {
         return totalPrice;
