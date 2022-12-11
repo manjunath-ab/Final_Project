@@ -225,6 +225,7 @@ public class FoodJPanel extends javax.swing.JPanel {
         newOrder.setToLong(longi);
         newOrder.setQuantity(Integer.parseInt(String.valueOf(sQuant.getValue())));
         newOrder.setTotalPrice(selectedItem.getPrice()*newOrder.getQuantity());
+        newOrder.setItemID(selectedItem.getId());
         System.out.print(lat);
         System.out.print(longi);
         db.store(newOrder);

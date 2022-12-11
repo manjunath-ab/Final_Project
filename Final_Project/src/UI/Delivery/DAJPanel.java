@@ -46,10 +46,12 @@ public class DAJPanel extends javax.swing.JPanel {
         Order o = (Order) result.next(); 
         Object[] row = new Object[100];//2 members for now
             //row[0]=e.getName();
-            row[0]=o;//1st column stores object names so..they get deleted
-            row[1]=o.getOrderID();
+            row[1]=o;//1st column stores object names so..they get deleted
+            row[0]=o.getOrderID();
             //need to put from location and to location.
-            row[3]=o.getStatus();
+            row[2]=o.getItemID();
+            row[3]=o.getQuantity();
+            row[4]=o.getStatus();
             //row[3]=o.getLocation();
             model.addRow(row);
         }
@@ -68,24 +70,24 @@ public class DAJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnDeliver = new javax.swing.JButton();
-        txtLocation = new javax.swing.JTextField();
         btnGet = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnDeliveries = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        cbLocation = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 0, 51));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Item Name", "Order ID", "Test Loc", "Status"
+                "OrderID", "Item Name", "Item ID", "Quantity", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -139,6 +141,8 @@ public class DAJPanel extends javax.swing.JPanel {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
+        cbLocation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allston", "Back Bay", "Bay Village", "Beacon Hill", "Brighton", "Charlestown", "Chinatown–Leather District", "Dorchester", "Downtown", "East Boston", "Fenway-Kenmore", "Hyde Park", "Jamaica Plain", "Mattapan", "Mission Hill", "North End", "Roslindale", "Roxbury", "South Boston", "South End", "West End", "West Roxbury", "Wharf District" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,8 +154,8 @@ public class DAJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGet)
-                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(382, 382, 382))
+                    .addComponent(cbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(435, 435, 435))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -169,9 +173,9 @@ public class DAJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(cbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGet, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
@@ -187,7 +191,7 @@ public class DAJPanel extends javax.swing.JPanel {
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
         // TODO add your handling code here:
         
-        location=txtLocation.getText();
+        location=cbLocation.getItemAt(cbLocation.getSelectedIndex());
         populatebycomm();
         
     }//GEN-LAST:event_btnGetActionPerformed
@@ -202,7 +206,7 @@ public class DAJPanel extends javax.swing.JPanel {
         }
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         //getting the whole object to manipulate
-        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,0);
+        Order selectedOrder= (Order) model.getValueAt(selectedRowIndex,1);
         //modify data of the object in the db
         ObjectContainer db = Db4o.openFile("orders.db4o");
        //List <Order> result=db.queryByExample(selectedOrder);
@@ -232,11 +236,11 @@ public class DAJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDeliver;
     private javax.swing.JButton btnDeliveries;
     private javax.swing.JButton btnGet;
+    private javax.swing.JComboBox<String> cbLocation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtLocation;
     // End of variables declaration//GEN-END:variables
 }

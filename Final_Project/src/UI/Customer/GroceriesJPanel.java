@@ -201,6 +201,7 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         newOrder.setLocation(location);
         newOrder.setQuantity(Integer.parseInt(String.valueOf(sQuant.getValue())));
         newOrder.setTotalPrice(selectedItem.getPrice()*newOrder.getQuantity());
+        newOrder.setItemID(selectedItem.getId());
         db.store(newOrder);
         db.commit();
         db.close();
