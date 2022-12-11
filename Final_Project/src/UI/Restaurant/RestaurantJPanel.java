@@ -163,6 +163,11 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtLocation.setText("jTextField2");
+        txtLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLocationActionPerformed(evt);
+            }
+        });
 
         btnRegister.setBackground(new java.awt.Color(0, 102, 204));
         btnRegister.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,6 +278,8 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
+    
+    //register button
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         //push a restaurant object into database with key attributes
@@ -290,6 +297,8 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    
+    //select button
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = jTable1.getSelectedRow();
@@ -311,6 +320,10 @@ public class RestaurantJPanel extends javax.swing.JPanel {
         MainJFrame.splitPane.setRightComponent(crudPanel);
         
     }//GEN-LAST:event_btnSelectActionPerformed
+
+    private void txtLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLocationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
