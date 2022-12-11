@@ -39,7 +39,8 @@ public class DAJPanel extends javax.swing.JPanel {
         Query query = db.query();
         query.constrain(Order.class);
         Constraint constr = query.descend("location").constrain(location);
-        query.descend("dagent").constrain("Unassigned").and(constr);
+        Constraint constr1=query.descend("status").constrain("Not Started");
+        query.descend("dagent").constrain("Unassigned").and(constr).and(constr1);
         ObjectSet result=query.execute();
         while(result.hasNext()){
         Order o = (Order) result.next(); 
