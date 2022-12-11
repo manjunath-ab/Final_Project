@@ -163,6 +163,7 @@ public class CustomerSheet extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //start order button
     private void btnStartOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartOrderActionPerformed
         // TODO add your handling code here:
         CustomerJPanel cPanel=new CustomerJPanel(username,txtName.getText(),txtLocation.getText());
