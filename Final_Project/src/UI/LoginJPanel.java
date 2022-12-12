@@ -8,6 +8,7 @@ import UI.Customer.CustomerSheet;
 import UI.CustomerService.AdminOptions;
 import UI.CustomerService.CustomerServiceJPanel;
 import UI.Delivery.DAJPanel;
+import UI.DeliveryAdmin.DeliveryAdminJPanel;
 import UI.Vendor.VendorJPanel;
 import UI.Restaurant.RestaurantJPanel;
 import model.UserLogin.UserLogin;
@@ -142,6 +143,11 @@ public class LoginJPanel extends javax.swing.JPanel {
         //conditons to redirect to sys,comm,hos,doc and patient
         //starting with sys:
         //for this application we need to add everything in one button functionality
+        if((txtUserName.getText().equals("Delivery Admin"))&&(txtPass.getText().equals("123"))){
+             DeliveryAdminJPanel jPanel=new DeliveryAdminJPanel();
+             splitPane.setRightComponent(jPanel);
+             return;
+        }
         if((txtUserName.getText().equals("Customer Service Admin"))&&(txtPass.getText().equals("123"))){
              AdminOptions jPanel=new AdminOptions();
              splitPane.setRightComponent(jPanel);
