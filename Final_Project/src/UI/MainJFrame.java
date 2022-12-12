@@ -33,6 +33,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         splitPane = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
@@ -43,15 +44,23 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\rjaco\\Documents\\NetBeansProjects\\Final_Project\\Final_Project\\src\\Styles\\Food-Delivery-Mobile-App-Blog-post.jpg")); // NOI18N
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         splitPane.setRightComponent(jPanel1);
@@ -83,7 +92,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegister)
                     .addComponent(btnLogin))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +101,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(btnLogin)
                 .addGap(30, 30, 30)
                 .addComponent(btnRegister)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(jPanel2);
@@ -169,6 +178,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JSplitPane splitPane;
