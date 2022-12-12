@@ -56,6 +56,11 @@ public class GroceriesJPanel extends javax.swing.JPanel {
         db.close();
         return rand_int;
     }
+    
+    
+    
+    
+    
     private void populateTable(){
         
         ObjectContainer db = Db4o.openFile("groceries.db4o");
