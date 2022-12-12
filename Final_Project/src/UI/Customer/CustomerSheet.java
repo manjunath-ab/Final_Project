@@ -19,6 +19,12 @@ import model.Order.Order;
  *
  * @author Admin
  */
+
+
+
+
+
+
 public class CustomerSheet extends javax.swing.JPanel {
 
     /**
