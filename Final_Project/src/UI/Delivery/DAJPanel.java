@@ -114,6 +114,7 @@ public class DAJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Community Name:");
 
+        btnDeliveries.setBackground(new java.awt.Color(255, 204, 0));
         btnDeliveries.setText("My Deliveries");
         btnDeliveries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
