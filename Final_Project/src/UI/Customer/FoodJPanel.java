@@ -119,6 +119,8 @@ public class FoodJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        btnPlaceOrder.setBackground(new java.awt.Color(0, 102, 204));
+        btnPlaceOrder.setForeground(new java.awt.Color(255, 255, 255));
         btnPlaceOrder.setText("Order");
         btnPlaceOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,8 +131,7 @@ public class FoodJPanel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Quantity:");
 
-        btnFrom.setBackground(new java.awt.Color(0, 102, 204));
-        btnFrom.setForeground(new java.awt.Color(255, 255, 255));
+        btnFrom.setBackground(new java.awt.Color(51, 255, 102));
         btnFrom.setText("Set Drop Location");
         btnFrom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +196,7 @@ public class FoodJPanel extends javax.swing.JPanel {
                         .addGap(167, 167, 167)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(363, 363, 363)
+                        .addGap(353, 353, 353)
                         .addComponent(btnPlaceOrder)))
                 .addContainerGap(196, Short.MAX_VALUE))
         );
@@ -211,9 +212,9 @@ public class FoodJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnFrom)
                         .addComponent(jLabel2)))
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
                 .addComponent(btnPlaceOrder)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
