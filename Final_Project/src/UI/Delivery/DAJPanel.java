@@ -183,6 +183,12 @@ public class DAJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
+    
+    
+    
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
         // TODO add your handling code here:
         
