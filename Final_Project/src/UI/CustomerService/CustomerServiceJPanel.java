@@ -25,14 +25,12 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
      * Creates new form CustomerServiceJPanel
      */
     
-    public CustomerServiceJPanel(String username) {
+    public CustomerServiceJPanel() {
         initComponents();
         populateTable();
     }
 
-    CustomerServiceJPanel() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
      private void populateTable(){
         ObjectContainer db = Db4o.openFile("orders.db4o");

@@ -47,7 +47,7 @@
                       <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="225" max="32767" attributes="0"/>
+              <EmptySpace pref="258" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,12 +98,11 @@
           <Color blue="80" green="80" red="80" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="4">
             <StringItem index="0" value="Restaurant Owner"/>
             <StringItem index="1" value="Vendor"/>
             <StringItem index="2" value="Delivery Agent"/>
             <StringItem index="3" value="Customer"/>
-            <StringItem index="4" value="Customer Service Agent"/>
           </StringArray>
         </Property>
       </Properties>

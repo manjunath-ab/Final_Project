@@ -52,7 +52,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         });
 
         cbType.setBackground(new java.awt.Color(128, 128, 128));
-        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Agent", "Customer", "Customer Service Agent" }));
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurant Owner", "Vendor", "Delivery Agent", "Customer" }));
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +116,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(308, 308, 308)
                         .addComponent(btnRegister)))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

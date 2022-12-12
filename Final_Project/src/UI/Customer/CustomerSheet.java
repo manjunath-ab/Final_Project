@@ -5,6 +5,7 @@
 package UI.Customer;
 import UI.Customer.CustomerJPanel;
 import static UI.MainJFrame.splitPane;
+import UI.Validate;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -24,6 +25,8 @@ public class CustomerSheet extends javax.swing.JPanel {
      * Creates new form CustomerSheet
      */
     String username;
+        Validate validate = new Validate();
+
     public CustomerSheet(String username) {
         initComponents();
         this.username=username;
@@ -87,6 +90,12 @@ public class CustomerSheet extends javax.swing.JPanel {
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Name on Order");
+
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Location/Community");
@@ -201,9 +210,15 @@ public class CustomerSheet extends javax.swing.JPanel {
 
     private void btnStartOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartOrderActionPerformed
         // TODO add your handling code here:
+        String name = txtName.getText();
+        if(validate.isEmptyOrNull(name)){
+                   
+                  JOptionPane.showMessageDialog(this,"Name Should not be empty or null");
+        }else
+        {
         CustomerJPanel cPanel=new CustomerJPanel(username,txtName.getText(),cbLocation.getItemAt(cbLocation.getSelectedIndex()));
         splitPane.setRightComponent(cPanel);
-        
+        }
     }//GEN-LAST:event_btnStartOrderActionPerformed
 
     private void btnRaiseReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseReqActionPerformed
@@ -264,6 +279,10 @@ public class CustomerSheet extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"Order has been cancelled");
         populateTable();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
