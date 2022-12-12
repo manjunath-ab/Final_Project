@@ -47,7 +47,7 @@
                       <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="258" max="32767" attributes="0"/>
+              <EmptySpace pref="225" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -103,7 +103,7 @@
             <StringItem index="1" value="Vendor"/>
             <StringItem index="2" value="Delivery Agent"/>
             <StringItem index="3" value="Customer"/>
-            <StringItem index="4" value=" "/>
+            <StringItem index="4" value="Customer Service Agent"/>
           </StringArray>
         </Property>
       </Properties>
