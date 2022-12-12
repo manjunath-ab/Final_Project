@@ -4,6 +4,11 @@
 
 
 Enterprises: Restaurants, Grocery Stall, Customer Service, Delivery Service.
+
 Organizations:  Agent Management, Customer Management, Conflict Management, Food Menu Management, Produce Management, Restaurant Management, Grocery Store Managemnet.
+
 Roles: Customer, Vendor Admin, Restaurant Admin, Customer Service Admin, Delivery Agent, Restaurant Owner, Vendor, Delivery Admin.
+
 Work requests: Ongoing, Delivered, Query, Resolved, Cancelled, Not Started.
+
+[AED_PPT.pptx](https://github.com/manjunath-ab/Final_Project/files/10204592/AED_PPT.pptx)
