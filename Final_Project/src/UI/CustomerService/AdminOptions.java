@@ -75,6 +75,7 @@ public class AdminOptions extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 204, 0));
         jButton2.setText("Resolve Conflicts");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
